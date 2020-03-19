@@ -14,6 +14,7 @@ export default [
 		output: {
 			dir: 'dist',
 			format: 'es',
+			entryFileNames: '[name].mjs',
 		},
 		plugins: [
 			typescript(),
@@ -28,6 +29,7 @@ export default [
 		output: {
 			dir: 'dist',
 			format: 'es',
+			entryFileNames: '[name].mjs',
 			banner: '#!/usr/bin/env node --experimental-modules',
 		},
 		plugins: [
