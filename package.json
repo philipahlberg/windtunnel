@@ -1,0 +1,43 @@
+{
+  "name": "windtunnel",
+  "version": "0.0.1",
+  "description": "A minimalistic test-runner",
+  "type": "module",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "bin": {
+    "windtunnel": "dist/cli.mjs"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "files": [
+    "dist/**/*.mjs",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philipahlberg/windtunnel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philipahlberg/windtunnel/issues"
+  },
+  "homepage": "https://github.com/philipahlberg/windtunnel#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-typescript": "^3.0.0",
+    "@types/node": "^13.7.1",
+    "rollup": "^1.31.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  }
+}
