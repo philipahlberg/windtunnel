@@ -22,7 +22,7 @@
   "homepage": "https://github.com/philipahlberg/windtunnel#readme",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "npm run build && node tests/index.mjs"
+    "test": "node tests/index.mjs"
   },
   "dependencies": {},
   "devDependencies": {
