@@ -1,6 +1,6 @@
 {
   "name": "windtunnel",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A modern & minimalistic testing library and CLI",
   "type": "module",
   "main": "dist/index.mjs",
@@ -33,7 +33,8 @@
     "postinstall": "node scripts/install.mjs",
     "build": "node scripts/build.mjs",
     "test": "node scripts/test.mjs",
-    "version": "node scripts/version.mjs"
+    "version": "node scripts/version.mjs",
+    "publish": "node scripts/publish.mjs"
   },
   "dependencies": {},
   "devDependencies": {
