@@ -10,6 +10,7 @@ const readFile = util.promisify(fs.readFile);
   try {
     const pkg = JSON.parse(await readFile('package.json'));
     for (const workspace of pkg.workspaces) {
+      console.log(`Building ${workspace}`);
       const output = await run(`cd ${workspace} && npm run build`);
       console.log(output.stdout);
     }
