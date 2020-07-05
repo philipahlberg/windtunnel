@@ -1,0 +1,33 @@
+{
+  "name": "@windtunnel/core",
+  "version": "0.1.0",
+  "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
+  "description": "The windtunnel core library",
+  "license": "MIT",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "test"
+  ],
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philipahlberg/windtunnel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philipahlberg/windtunnel/issues"
+  },
+  "homepage": "https://github.com/philipahlberg/windtunnel#readme",
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "node tests/index.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "../node_modules/rollup"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {}
+}
