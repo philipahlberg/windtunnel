@@ -13,10 +13,10 @@
     "test": "tests"
   },
   "workspaces": [
+    "windtunnel-core",
     "windtunnel-assert",
-    "windtunnel-cli",
     "windtunnel-colors",
-    "windtunnel-core"
+    "windtunnel-cli"
   ],
   "repository": {
     "type": "git",
