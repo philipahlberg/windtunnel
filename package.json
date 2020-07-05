@@ -12,6 +12,12 @@
     "example": "examples",
     "test": "tests"
   },
+  "workspaces": [
+    "windtunnel-assert",
+    "windtunnel-cli",
+    "windtunnel-colors",
+    "windtunnel-core"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/philipahlberg/windtunnel.git"
@@ -23,6 +29,11 @@
     "url": "https://github.com/philipahlberg/windtunnel/issues"
   },
   "homepage": "https://github.com/philipahlberg/windtunnel#readme",
+  "scripts": {
+    "postinstall": "node scripts/install.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs"
+  },
   "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^8.1.0",
