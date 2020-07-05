@@ -1,4 +1,4 @@
-import { deepEqual } from 'assert';
+import { deepStrictEqual as deepEqual, strict as assert } from 'assert';
 import { runModule } from '../dist/index.mjs';
 
 async function testSyncSuccess() {
