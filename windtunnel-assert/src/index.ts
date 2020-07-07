@@ -28,3 +28,25 @@ export const assertThrows = (f: () => any, message: string) => {
   }
   throw new Error(message);
 };
+
+export interface Call {
+  input: any[];
+  output: any[];
+}
+
+export interface Spy {
+  (...args: any[]): any;
+  calls: Call[];
+}
+
+export const createSpy = (fn: (...args: any[]) => any) => {
+  const calls: Call[] = [];
+  const spy = Object.assign(fn, { calls });
+  return new Proxy(spy, {
+    apply(target: Spy, context: any, input: any) {
+      const output = target.apply(context, input);
+      target.calls.push({ input, output });
+      return output;
+    },
+  });
+};

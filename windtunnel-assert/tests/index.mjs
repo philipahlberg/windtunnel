@@ -36,11 +36,30 @@ function testAssertThrows() {
   }, 'should throw when the inner function does not throw');
 }
 
+function testCreateSpy() {
+  const spy = lib.createSpy(v => v);
+  assert.strictEqual(spy.calls.length, 0);
+}
+
+function testCallSpy() {
+  const spy = lib.createSpy(v => v * 2);
+  spy(123);
+  assert.deepStrictEqual(spy.calls.length, 1);
+  assert.deepStrictEqual(spy.calls[0].input, [123]);
+  assert.deepStrictEqual(spy.calls[0].output, 123 * 2);
+  spy(456);
+  assert.deepStrictEqual(spy.calls.length, 2);
+  assert.deepStrictEqual(spy.calls[1].input, [456]);
+  assert.deepStrictEqual(spy.calls[1].output, 456 * 2);
+}
+
 (async () => {
   try {
     testAssert();
     testAssertEqual();
     testAssertThrows();
+    testCreateSpy();
+    testCallSpy();
     console.log('Passed.');
     process.exit(0);
   } catch (error) {
