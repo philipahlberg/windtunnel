@@ -12,10 +12,8 @@ async function testSyncSuccess() {
     passed: [
       {
         name: 'syncSuccess',
-        output: {
-          passed: true,
-          message: 'Passed.',
-        },
+        passed: true,
+        message: 'Passed.',
       },
     ],
     failed: [],
@@ -34,10 +32,8 @@ async function testAsyncSuccess() {
     passed: [
       {
         name: 'asyncSuccess',
-        output: {
-          passed: true,
-          message: 'Passed.',
-        },
+        passed: true,
+        message: 'Passed.',
       },
     ],
     failed: [],
@@ -56,10 +52,8 @@ async function testSyncFail() {
     failed: [
       {
         name: 'syncFail',
-        output: {
-          passed: false,
-          message: 'false == true',
-        },
+        passed: false,
+        message: 'false == true',
       },
     ],
   });
@@ -78,10 +72,8 @@ async function testAsyncFail() {
     failed: [
       {
         name: 'asyncFail',
-        output: {
-          passed: false,
-          message: 'false == true',
-        },
+        passed: false,
+        message: 'false == true',
       },
     ],
   });
@@ -109,33 +101,25 @@ async function testMixed() {
     passed: [
       {
         name: 'syncSuccess',
-        output: {
-          passed: true,
-          message: 'Passed.',
-        },
+        passed: true,
+        message: 'Passed.',
       },
       {
         name: 'asyncSuccess',
-        output: {
-          passed: true,
-          message: 'Passed.',
-        },
+        passed: true,
+        message: 'Passed.',
       },
     ],
     failed: [
       {
         name: 'syncFail',
-        output: {
-          passed: false,
-          message: 'false == true',
-        },
+        passed: false,
+        message: 'false == true',
       },
       {
         name: 'asyncFail',
-        output: {
-          passed: false,
-          message: 'false == true',
-        },
+        passed: false,
+        message: 'false == true',
       },
     ]
   });

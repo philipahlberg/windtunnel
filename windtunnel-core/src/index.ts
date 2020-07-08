@@ -2,30 +2,21 @@ export interface Module {
   [name: string]: TestFn;
 }
 
-interface Test {
-  name: string;
-  fn: TestFn;
-}
+export type TestFn = SyncFn | AsyncFn;
 
-export type SyncTestFn = () => Output;
+export type SyncFn = () => void;
 
-export type AsyncTestFn = () => Promise<Output>;
-
-export type TestFn = SyncTestFn | AsyncTestFn;
-
-export interface Output {
-  passed: boolean;
-  message: string;
-}
-
-export interface Result {
-  name: string;
-  output: Output;
-}
+export type AsyncFn = () => Promise<void>;
 
 export interface Report {
   passed: Result[];
   failed: Result[];
+}
+
+export interface Result {
+  name: string;
+  passed: boolean;
+  message: string;
 }
 
 export const runModule = async (mod: Module): Promise<Report> => {
@@ -34,6 +25,11 @@ export const runModule = async (mod: Module): Promise<Report> => {
   const report = createReport(results);
   return report;
 };
+
+interface Test {
+  name: string;
+  fn: TestFn;
+}
 
 const getTests = (mod: Module): Test[] => {
   return Object.entries(mod)
@@ -49,18 +45,14 @@ const runTest = async (test: Test): Promise<Result> => {
     await test.fn();
     return {
       name: test.name,
-      output: {
-        passed: true,
-        message: 'Passed.',
-      }
+      passed: true,
+      message: 'Passed.',
     };
   } catch (error) {
     return {
       name: test.name,
-      output: {
-        passed: false,
-        message: error.message,
-      }
+      passed: false,
+      message: error.message,
     };
   }
 };
@@ -75,9 +67,9 @@ const createReport = (results: Result[]): Report => {
 };
 
 const filterPassed = (results: Result[]): Result[] => {
-  return results.filter(result => result.output.passed);
+  return results.filter(result => result.passed);
 };
 
 const filterFailed = (results: Result[]): Result[] => {
-  return results.filter(result => !result.output.passed);
+  return results.filter(result => !result.passed);
 };
