@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "The windtunnel core library",
-  "license": "MIT",
   "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "license": "MIT",
   "keywords": [
     "test"
   ],

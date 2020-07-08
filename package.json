@@ -2,15 +2,11 @@
   "name": "windtunnel",
   "version": "0.1.0",
   "description": "A modern & minimalistic testing library and CLI",
-  "type": "module",
-  "main": "dist/index.mjs",
-  "module": "dist/index.mjs",
   "bin": {
     "windtunnel": "windtunnel-cli/dist/index.mjs"
   },
   "directories": {
-    "example": "examples",
-    "test": "tests"
+    "example": "examples"
   },
   "workspaces": [
     "windtunnel-core",
