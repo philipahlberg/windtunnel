@@ -1,7 +1,7 @@
 import { deepStrictEqual as deepEqual, strict as assert } from 'assert';
 import { runModule } from '../dist/index.mjs';
 
-async function testSyncSuccess() {
+export async function testSyncSuccess() {
   const report = await runModule({
     syncSuccess: () => {
       assert(true);
@@ -20,7 +20,7 @@ async function testSyncSuccess() {
   });
 }
 
-async function testAsyncSuccess() {
+export async function testAsyncSuccess() {
   const report = await runModule({
     asyncSuccess: async () => {
       await Promise.resolve();
@@ -40,7 +40,7 @@ async function testAsyncSuccess() {
   });
 }
 
-async function testSyncFail() {
+export async function testSyncFail() {
   const report = await runModule({
     syncFail: () => {
       assert(false);
@@ -59,7 +59,7 @@ async function testSyncFail() {
   });
 }
 
-async function testAsyncFail() {
+export async function testAsyncFail() {
   const report = await runModule({
     asyncFail: async () => {
       await Promise.resolve();
@@ -79,7 +79,7 @@ async function testAsyncFail() {
   });
 }
 
-async function testMixed() {
+export async function testMixed() {
   const report = await runModule({
     syncSuccess: () => {
       assert(true);
@@ -124,21 +124,3 @@ async function testMixed() {
     ]
   });
 }
-
-(async () => {
-  try {
-    await Promise.all([
-      testSyncSuccess(),
-      testAsyncSuccess(),
-      testSyncFail(),
-      testAsyncFail(),
-      testMixed(),
-    ]);
-    console.log('Passed.');
-    process.exit(0);
-  } catch (error) {
-    console.error('Failed:');
-    console.error(error);
-    process.exit(1);
-  }
-})();

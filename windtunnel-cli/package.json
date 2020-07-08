@@ -26,11 +26,12 @@
   "homepage": "https://github.com/philipahlberg/windtunnel#readme",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "node tests/index.mjs"
+    "test": "windtunnel tests/index.mjs"
   },
   "dependencies": {},
   "devDependencies": {
-    "rollup": "../node_modules/rollup"
+    "rollup": "../node_modules/rollup",
+    "@windtunnel/cli": "^0.1.0"
   },
   "peerDependencies": {},
   "optionalDependencies": {}

@@ -1,7 +1,7 @@
 import assert from 'assert';
 import * as lib from '../dist/index.mjs';
 
-function testAssert() {
+export function testAssert() {
   assert.doesNotThrow(() => {
     lib.assert(true, 'message');
   }, 'assert(true) should not throw');
@@ -10,7 +10,7 @@ function testAssert() {
   }, 'assert(false) should throw');
 }
 
-function testAssertEqual() {
+export function testAssertEqual() {
   assert.doesNotThrow(() => {
     lib.assertEqual(1, 1);
   }, 'should work for numbers');
@@ -25,7 +25,7 @@ function testAssertEqual() {
   }, 'should work for objects');
 }
 
-function testAssertThrows() {
+export function testAssertThrows() {
   assert.doesNotThrow(() => {
     lib.assertThrows(() => {
       throw new Error();
@@ -36,12 +36,12 @@ function testAssertThrows() {
   }, 'should throw when the inner function does not throw');
 }
 
-function testCreateSpy() {
+export function testCreateSpy() {
   const spy = lib.createSpy(v => v);
   assert.strictEqual(spy.calls.length, 0);
 }
 
-function testCallSpy() {
+export function testCallSpy() {
   const spy = lib.createSpy(v => v * 2);
   spy(123);
   assert.deepStrictEqual(spy.calls.length, 1);
@@ -52,19 +52,3 @@ function testCallSpy() {
   assert.deepStrictEqual(spy.calls[1].input, [456]);
   assert.deepStrictEqual(spy.calls[1].output, 456 * 2);
 }
-
-(async () => {
-  try {
-    testAssert();
-    testAssertEqual();
-    testAssertThrows();
-    testCreateSpy();
-    testCallSpy();
-    console.log('Passed.');
-    process.exit(0);
-  } catch (error) {
-    console.error('Failed:');
-    console.error(error);
-    process.exit(1);
-  }
-})();
