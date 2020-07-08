@@ -1,14 +1,14 @@
-import { deepStrictEqual as deepEqual, strict as assert } from 'assert';
+import { assert, assertEqual } from '@windtunnel/assert';
 import { runModule } from '../dist/index.mjs';
 
 export async function testSyncSuccess() {
   const report = await runModule({
     syncSuccess: () => {
-      assert(true);
+      assert(true, 'true == true');
     },
   });
 
-  deepEqual(report, {
+  assertEqual(report, {
     passed: [
       {
         name: 'syncSuccess',
@@ -24,11 +24,11 @@ export async function testAsyncSuccess() {
   const report = await runModule({
     asyncSuccess: async () => {
       await Promise.resolve();
-      assert(true);
+      assert(true, 'true == true');
     },
   });
 
-  deepEqual(report, {
+  assertEqual(report, {
     passed: [
       {
         name: 'asyncSuccess',
@@ -43,11 +43,11 @@ export async function testAsyncSuccess() {
 export async function testSyncFail() {
   const report = await runModule({
     syncFail: () => {
-      assert(false);
+      assert(false, 'false == true');
     },
   });
 
-  deepEqual(report, {
+  assertEqual(report, {
     passed: [],
     failed: [
       {
@@ -63,11 +63,11 @@ export async function testAsyncFail() {
   const report = await runModule({
     asyncFail: async () => {
       await Promise.resolve();
-      assert(false);
+      assert(false, 'false == true');
     },
   });
 
-  deepEqual(report, {
+  assertEqual(report, {
     passed: [],
     failed: [
       {
@@ -82,22 +82,22 @@ export async function testAsyncFail() {
 export async function testMixed() {
   const report = await runModule({
     syncSuccess: () => {
-      assert(true);
+      assert(true, 'true == true');
     },
     asyncSuccess: async () => {
       await Promise.resolve();
-      assert(true);
+      assert(true, 'true == true');
     },
     syncFail: () => {
-      assert(false);
+      assert(false, 'false == true');
     },
     asyncFail: async () => {
       await Promise.resolve();
-      assert(false);
+      assert(false, 'false == true');
     },
   });
 
-  deepEqual(report, {
+  assertEqual(report, {
     passed: [
       {
         name: 'syncSuccess',

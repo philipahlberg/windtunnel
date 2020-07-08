@@ -29,6 +29,19 @@ export const assertThrows = (f: () => any, message: string) => {
   throw new Error(message);
 };
 
+export const assertDoesNotThrow = (f: () => any, message: string) => {
+  try {
+    f();
+  } catch (error) {
+    const output = [
+      'Expected function not to throw:',
+      message,
+      error,
+    ].join('\n');
+    throw new Error(output);
+  }
+};
+
 export interface Call {
   input: any[];
   output: any[];

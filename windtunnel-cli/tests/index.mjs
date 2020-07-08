@@ -1,4 +1,4 @@
-import assert from 'assert';
+import { assert } from '@windtunnel/assert';
 import process from 'child_process';
 import util from 'util';
 

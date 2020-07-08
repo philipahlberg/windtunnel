@@ -1,4 +1,4 @@
-import { deepEqual } from 'assert';
+import { assertEqual } from '@windtunnel/assert';
 import {
   write,
   ForegroundColors,
@@ -12,7 +12,7 @@ export function plain() {
     background: null,
     foreground: null,
   });
-  deepEqual(actual, 'foo');
+  assertEqual(actual, 'foo');
 }
 
 export function black() {
@@ -22,7 +22,7 @@ export function black() {
     foreground: ForegroundColors.Black,
   });
 
-  deepEqual(actual, '\x1B[30mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[30mfoo\x1B[0m');
 }
 
 export function red() {
@@ -32,7 +32,7 @@ export function red() {
     foreground: ForegroundColors.Red,
   });
 
-  deepEqual(actual, '\x1B[31mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[31mfoo\x1B[0m');
 }
 
 export function yellowBold() {
@@ -42,7 +42,7 @@ export function yellowBold() {
     foreground: ForegroundColors.Yellow,
   });
 
-  deepEqual(actual, '\x1B[1;33mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[1;33mfoo\x1B[0m');
 }
 
 export function blueUnderline() {
@@ -52,7 +52,7 @@ export function blueUnderline() {
     foreground: ForegroundColors.Blue,
   });
 
-  deepEqual(actual, '\x1B[4;34mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[4;34mfoo\x1B[0m');
 }
 
 export function greenBoldUnderline() {
@@ -62,7 +62,7 @@ export function greenBoldUnderline() {
     foreground: ForegroundColors.Green,
   });
 
-  deepEqual(actual, '\x1B[1;4;32mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[1;4;32mfoo\x1B[0m');
 }
 
 export function magentaOnWhite() {
@@ -72,7 +72,7 @@ export function magentaOnWhite() {
     foreground: ForegroundColors.Magenta,
   });
 
-  deepEqual(actual, '\x1B[35;47mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[35;47mfoo\x1B[0m');
 }
 
 export function yellowOnBlue() {
@@ -82,7 +82,7 @@ export function yellowOnBlue() {
     foreground: ForegroundColors.Yellow,
   });
 
-  deepEqual(actual, '\x1B[33;44mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[33;44mfoo\x1B[0m');
 }
 
 export function boldCyanOnWhite() {
@@ -92,7 +92,7 @@ export function boldCyanOnWhite() {
     foreground: ForegroundColors.Cyan,
   });
 
-  deepEqual(actual, '\x1B[1;36;47mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[1;36;47mfoo\x1B[0m');
 }
 
 export function boldUnderlineCyanOnWhite() {
@@ -102,7 +102,7 @@ export function boldUnderlineCyanOnWhite() {
     foreground: ForegroundColors.Cyan,
   });
 
-  deepEqual(actual, '\x1B[1;4;36;47mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[1;4;36;47mfoo\x1B[0m');
 }
 
 export function plainBoldUnderline() {
@@ -112,7 +112,7 @@ export function plainBoldUnderline() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[1;4mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[1;4mfoo\x1B[0m');
 }
 
 export function dimmed() {
@@ -122,7 +122,7 @@ export function dimmed() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[2mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[2mfoo\x1B[0m');
 }
 
 export function italic() {
@@ -132,7 +132,7 @@ export function italic() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[3mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[3mfoo\x1B[0m');
 }
 
 export function blink() {
@@ -142,7 +142,7 @@ export function blink() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[5mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[5mfoo\x1B[0m');
 }
 
 export function invert() {
@@ -152,7 +152,7 @@ export function invert() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[7mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[7mfoo\x1B[0m');
 }
 
 export function hidden() {
@@ -162,7 +162,7 @@ export function hidden() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[8mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[8mfoo\x1B[0m');
 }
 
 export function strikethrough() {
@@ -172,5 +172,5 @@ export function strikethrough() {
     foreground: null,
   });
 
-  deepEqual(actual, '\x1B[9mfoo\x1B[0m');
+  assertEqual(actual, '\x1B[9mfoo\x1B[0m');
 }
