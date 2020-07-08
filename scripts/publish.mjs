@@ -14,10 +14,8 @@ const readFile = util.promisify(fs.readFile);
       const name = subpkg.name;
       const version = subpkg.version;
       console.log(`Publishing ${name} v${version}...`);
-      if (seriously) {
-        const output = await run(`cd ${workspace} && npm publish`);
-        console.log(output.stdout);
-      }
+      const output = await run(`cd ${workspace} && npm publish`);
+      console.log(output.stdout);
     }
     process.exit(0);
   } catch (error) {
