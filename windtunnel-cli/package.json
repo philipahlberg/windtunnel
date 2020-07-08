@@ -28,7 +28,9 @@
     "build": "rollup -c rollup.config.js",
     "test": "windtunnel tests/index.mjs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@windtunnel/core": "^0.1.0"
+  },
   "devDependencies": {
     "rollup": "../node_modules/rollup",
     "@windtunnel/cli": "^0.1.0",

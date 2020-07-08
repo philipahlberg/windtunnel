@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
-import { Module, Result, Report, runModule } from '../../windtunnel-core';
+import { Module, Result, Report, runModule } from '@windtunnel/core';
 
 const importTestSuite = async (arg: string): Promise<Module> => {
 	const file = resolve(arg);
