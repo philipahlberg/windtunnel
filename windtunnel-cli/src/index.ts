@@ -17,7 +17,7 @@ const reportFailed = (results: Result[]) => {
   console.log(`${results.length} failed.`);
 
   const lines = results.map(result => {
-    return `  ${result.name}: ${result.output.message}`;
+    return `  ${result.name}: ${result.message}`;
   });
 
   console.log(lines.join('\n'));
