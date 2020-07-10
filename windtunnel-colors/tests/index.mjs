@@ -1,13 +1,13 @@
 import { assertEqual } from '@windtunnel/assert';
 import {
-  write,
+  format,
   ForegroundColors,
   BackgroundColors,
   Attributes,
 } from '../dist/index.mjs';
 
 export function plain() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: null,
     background: null,
     foreground: null,
@@ -16,7 +16,7 @@ export function plain() {
 }
 
 export function black() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: null,
     background: null,
     foreground: ForegroundColors.Black,
@@ -26,7 +26,7 @@ export function black() {
 }
 
 export function red() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: null,
     background: null,
     foreground: ForegroundColors.Red,
@@ -36,7 +36,7 @@ export function red() {
 }
 
 export function yellowBold() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Bold]),
     background: null,
     foreground: ForegroundColors.Yellow,
@@ -46,7 +46,7 @@ export function yellowBold() {
 }
 
 export function blueUnderline() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Underline]),
     background: null,
     foreground: ForegroundColors.Blue,
@@ -56,7 +56,7 @@ export function blueUnderline() {
 }
 
 export function greenBoldUnderline() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Bold, Attributes.Underline]),
     background: null,
     foreground: ForegroundColors.Green,
@@ -66,7 +66,7 @@ export function greenBoldUnderline() {
 }
 
 export function magentaOnWhite() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: null,
     background: BackgroundColors.White,
     foreground: ForegroundColors.Magenta,
@@ -76,7 +76,7 @@ export function magentaOnWhite() {
 }
 
 export function yellowOnBlue() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: null,
     background: BackgroundColors.Blue,
     foreground: ForegroundColors.Yellow,
@@ -86,7 +86,7 @@ export function yellowOnBlue() {
 }
 
 export function boldCyanOnWhite() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Bold]),
     background: BackgroundColors.White,
     foreground: ForegroundColors.Cyan,
@@ -96,7 +96,7 @@ export function boldCyanOnWhite() {
 }
 
 export function boldUnderlineCyanOnWhite() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Bold, Attributes.Underline]),
     background: BackgroundColors.White,
     foreground: ForegroundColors.Cyan,
@@ -106,7 +106,7 @@ export function boldUnderlineCyanOnWhite() {
 }
 
 export function plainBoldUnderline() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Bold, Attributes.Underline]),
     background: null,
     foreground: null,
@@ -116,7 +116,7 @@ export function plainBoldUnderline() {
 }
 
 export function dimmed() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Dimmed]),
     background: null,
     foreground: null,
@@ -126,7 +126,7 @@ export function dimmed() {
 }
 
 export function italic() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Italic]),
     background: null,
     foreground: null,
@@ -136,7 +136,7 @@ export function italic() {
 }
 
 export function blink() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Blink]),
     background: null,
     foreground: null,
@@ -146,7 +146,7 @@ export function blink() {
 }
 
 export function invert() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Invert]),
     background: null,
     foreground: null,
@@ -156,7 +156,7 @@ export function invert() {
 }
 
 export function hidden() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Hidden]),
     background: null,
     foreground: null,
@@ -166,7 +166,7 @@ export function hidden() {
 }
 
 export function strikethrough() {
-  const actual = write('foo', {
+  const actual = format('foo', {
     attributes: new Set([Attributes.Strikethrough]),
     background: null,
     foreground: null,

@@ -1,6 +1,6 @@
 import { Options, codes } from './options';
 
-export function write(content: string, options: Options): string {
+export function format(content: string, options: Options): string {
   if (
     options.attributes == null &&
     options.background == null &&
