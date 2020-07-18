@@ -29,7 +29,8 @@
     "test": "windtunnel tests/index.mjs"
   },
   "dependencies": {
-    "@windtunnel/core": "^0.1.0"
+    "@windtunnel/core": "^0.1.0",
+    "@windtunnel/colors": "^0.1.0"
   },
   "devDependencies": {
     "rollup": "../node_modules/rollup",

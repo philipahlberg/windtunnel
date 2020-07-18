@@ -24,5 +24,5 @@ export async function testFail() {
   assert(output.stderr === '');
   assert(output.stdout.includes('0 passed.'));
   assert(output.stdout.includes('1 failed.'));
-  assert(output.stdout.includes('testFail: false == true'))
+  assert(output.stdout.includes('testFail: false == true'));
 }
