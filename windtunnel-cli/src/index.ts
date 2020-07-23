@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
 import { runModule, Module, Result, Report } from '@windtunnel/core';
-import { format, Attributes, ForegroundColors } from '@windtunnel/colors';
+import { write, Attributes, ForegroundColors } from '@windtunnel/colors';
 
 const importModule = async (arg: string): Promise<Module> => {
 	const file = resolve(arg);
@@ -14,11 +14,11 @@ const reportPassed = (passed: Result[]) => {
 	const message = `${passed.length} passed.`;
 
 	if (passed.length > 0) {
-		console.log(format(message, {
+		console.log(write(message, {
 			foreground: ForegroundColors.Green,
 		}));
 	} else {
-		console.log(format(message, {
+		console.log(write(message, {
 			attributes: new Set([Attributes.Dimmed])
 		}));
 	}
@@ -28,7 +28,7 @@ const reportFailed = (failed: Result[]) => {
 	const message = `${failed.length} failed.`;
 
 	if (failed.length > 0) {
-		console.log(format(message, {
+		console.log(write(message, {
 			foreground: ForegroundColors.Red,
 		}));
 
@@ -39,7 +39,7 @@ const reportFailed = (failed: Result[]) => {
 		console.log('');
 		console.log(failures.join('\n'));
 	} else {
-		console.log(format(message, {
+		console.log(write(message, {
 			attributes: new Set([Attributes.Dimmed]),
 		}));
 	}
