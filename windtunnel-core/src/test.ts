@@ -1,5 +1,7 @@
 import { Module, Entry, Fn, getEntries } from './module';
 
+export type TestModule = Module<Fn>;
+
 export interface TestReport {
   passed: TestResult[];
   failed: TestResult[];
@@ -11,7 +13,7 @@ export interface TestResult {
   message: string;
 }
 
-export const testModule = async (mod: Module<Fn>): Promise<TestReport> => {
+export const testModule = async (mod: TestModule): Promise<TestReport> => {
   const tests = getEntries(mod);
   const results = await runTests(tests);
   const report = createReport(results);

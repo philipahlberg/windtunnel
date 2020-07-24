@@ -8,12 +8,47 @@ const readFile = util.promisify(fs.readFile);
 
 (async () => {
   try {
+    // Get the top-level package.json file
     const pkg = JSON.parse(await readFile('package.json'));
-    for (const workspace of pkg.workspaces) {
-      console.log(`Installing ${workspace}...`);
-      const output = await run(`cd ${workspace} && npm install`);
-      console.error(output.stderr);
-      console.log(output.stdout);
+    // Get all the nested package.json files
+    const projects = await Promise.all(pkg.workspaces.map(async (directory) => {
+      const file = await readFile(`${directory}/package.json`);
+      const pkg = JSON.parse(file);
+      return {
+        directory,
+        package: pkg,
+      }
+    }));
+
+    const packages = projects.map(project => project.package.name);
+
+    for (const project of projects) {
+      // Install the project's dependencies
+      const directory = project.directory;
+      console.log(`Installing ${directory}...`);
+      const install = await run(`cd ${directory} && npm install`);
+      console.error(install.stderr);
+      console.log(install.stdout);
+      // Find all the dependencies to sibling packages...
+      const dependencies = Object.keys(project.package.dependencies)
+        .filter(dependency => packages.includes(dependency));
+      // And link all of those dependencies
+      for (const dependency of dependencies) {
+        console.log(`Linking ${dependency} into ${directory}...`);
+        const link = await run(`cd ${directory} && npm link ${dependency}`);
+        console.error(link.stderr);
+        console.log(link.stdout);
+      }
+      // Build the package to make it ready to be linked against
+      console.log(`Building ${project.package.name}...`);
+      const build = await run(`cd ${directory} && npm run build`);
+      console.error(build.stderr);
+      console.log(build.stdout);
+      // Lastly, make the project available for linking into other projects
+      console.log(`Preparing ${project.package.name} for linking...`);
+      const link = await run(`cd ${directory} && npm link`);
+      console.error(link.stderr);
+      console.log(link.stdout);
     }
     process.exit(0);
   } catch (error) {

@@ -1,34 +1,34 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
-import { runModule, Module, Result, Report } from '@windtunnel/core';
-import { write, Attributes, ForegroundColors } from '@windtunnel/colors';
+import { testModule, TestModule, TestResult, TestReport } from '@windtunnel/core';
+import { format, Attributes, ForegroundColors } from '@windtunnel/colors';
 
-const importModule = async (arg: string): Promise<Module> => {
+const importModule = async (arg: string): Promise<TestModule> => {
 	const file = resolve(arg);
 	const url = pathToFileURL(file);
 	const mod = await import(url.href);
 	return mod;
 };
 
-const reportPassed = (passed: Result[]) => {
+const reportPassed = (passed: TestResult[]) => {
 	const message = `${passed.length} passed.`;
 
 	if (passed.length > 0) {
-		console.log(write(message, {
+		console.log(format(message, {
 			foreground: ForegroundColors.Green,
 		}));
 	} else {
-		console.log(write(message, {
+		console.log(format(message, {
 			attributes: new Set([Attributes.Dimmed])
 		}));
 	}
 };
 
-const reportFailed = (failed: Result[]) => {
+const reportFailed = (failed: TestResult[]) => {
 	const message = `${failed.length} failed.`;
 
 	if (failed.length > 0) {
-		console.log(write(message, {
+		console.log(format(message, {
 			foreground: ForegroundColors.Red,
 		}));
 
@@ -39,19 +39,19 @@ const reportFailed = (failed: Result[]) => {
 		console.log('');
 		console.log(failures.join('\n'));
 	} else {
-		console.log(write(message, {
+		console.log(format(message, {
 			attributes: new Set([Attributes.Dimmed]),
 		}));
 	}
 };
 
-const reportResults = (report: Report) => {
+const reportResults = (report: TestReport) => {
 	console.log('');
 	reportPassed(report.passed);
 	reportFailed(report.failed);
 };
 
-const exitProcess = (report: Report) => {
+const exitProcess = (report: TestReport) => {
 	const exitCode = report.failed.length > 0 ? 1 : 0;
 	process.exit(exitCode);
 };
@@ -59,7 +59,7 @@ const exitProcess = (report: Report) => {
 (async () => {
 	const arg = process.argv[2];
 	const mod = await importModule(arg);
-	const report = await runModule(mod);
+	const report = await testModule(mod);
 	reportResults(report);
 	exitProcess(report);
 })();

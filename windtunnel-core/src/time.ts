@@ -1,5 +1,7 @@
 import { Module, Entry, SyncFn, getEntries } from './module';
 
+export type TimeModule = Module<SyncFn>;
+
 export interface TimeReport {
   results: TimeResult[];
 }
