@@ -12,6 +12,7 @@ const readFile = util.promisify(fs.readFile);
     for (const workspace of pkg.workspaces) {
       console.log(`Testing ${workspace}...`);
       const output = await run(`cd ${workspace} && npm test`);
+      console.error(output.stderr);
       console.log(output.stdout);
     }
     process.exit(0);

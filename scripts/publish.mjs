@@ -15,6 +15,7 @@ const readFile = util.promisify(fs.readFile);
       const version = subpkg.version;
       console.log(`Publishing ${name} v${version}...`);
       const output = await run(`cd ${workspace} && npm publish`);
+      console.error(output.stderr);
       console.log(output.stdout);
     }
     process.exit(0);
