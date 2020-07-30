@@ -28,7 +28,7 @@ const timeItems = (entries: Entry<SyncFn>[]): TimeResult[] => {
 };
 
 const MIN_ITERATIONS = 5;
-const MAX_TIME = 10_000_000n;
+const MAX_TIME = 5_000_000_000n;
 
 const timeItem = (entry: Entry<SyncFn>): TimeResult => {
   const sample = [];
@@ -99,15 +99,15 @@ const T_TABLE = {
 const T_INFINITY = 1.96;
 
 const criticalValueIsDefinedFor = (df: number): df is keyof (typeof T_TABLE) => {
-return 1 <= df && df <= 30;
+  return 1 <= df && df <= 30;
 };
 
 const getCriticalValue = (df: number): number => {
-if (criticalValueIsDefinedFor(df)) {
-  return T_TABLE[df];
-} else {
-  return T_INFINITY;
-}
+  if (criticalValueIsDefinedFor(df)) {
+    return T_TABLE[df];
+  } else {
+    return T_INFINITY;
+  }
 };
 
 const createReport = (results: TimeResult[]): TimeReport => {
