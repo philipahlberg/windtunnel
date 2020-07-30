@@ -29,21 +29,30 @@ const readFile = util.promisify(fs.readFile);
       const install = await run(`cd ${directory} && npm install`);
       console.error(install.stderr);
       console.log(install.stdout);
-      // Find all the dependencies to sibling packages...
-      const dependencies = Object.keys(project.package.dependencies)
-        .filter(dependency => packages.includes(dependency));
+
+      // Get all the package's dependencies...
+      const runtimeDependencies = Object.keys(project.package.dependencies);
+      const peerDependencies = Object.keys(project.package.peerDependencies);
+      // Find the ones that are local...
+      const localDependencies = [
+        ...runtimeDependencies,
+        ...peerDependencies
+      ].filter((dependency) => packages.includes(dependency));
+
       // And link all of those dependencies
-      for (const dependency of dependencies) {
+      for (const dependency of localDependencies) {
         console.log(`Linking ${dependency} into ${directory}...`);
         const link = await run(`cd ${directory} && npm link ${dependency}`);
         console.error(link.stderr);
         console.log(link.stdout);
       }
+
       // Build the package to make it ready to be linked against
       console.log(`Building ${project.package.name}...`);
       const build = await run(`cd ${directory} && npm run build`);
       console.error(build.stderr);
       console.log(build.stdout);
+
       // Lastly, make the project available for linking into other projects
       console.log(`Preparing ${project.package.name} for linking...`);
       const link = await run(`cd ${directory} && npm link`);

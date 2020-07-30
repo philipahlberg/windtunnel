@@ -27,9 +27,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "rollup": "../node_modules/rollup",
     "@windtunnel/cli": "^0.1.0",
-    "@windtunnel/assert": "^0.1.0"
+    "@windtunnel/assert": "^0.1.0",
+    "rollup": "../node_modules/rollup"
   },
   "peerDependencies": {},
   "optionalDependencies": {}
