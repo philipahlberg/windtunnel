@@ -5,10 +5,10 @@ import util from 'util';
 const run = util.promisify(process.exec);
 
 export async function testTime() {
-  const output = await run(`windtunnel time tests/cases/time.mjs`);
+  const output = await run(`node dist/index.mjs time tests/cases/time.mjs`);
   assert(output.stderr === '');
 
-  const lines = output.split('\n');
+  const lines = output.stdout.split('\n');
   const reallySlow = lines.find(line => line.startsWith('reallySlow'));
 
   assert(reallySlow.includes('reallySlow:'));
