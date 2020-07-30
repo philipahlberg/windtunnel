@@ -33,9 +33,9 @@
     "@windtunnel/core": "^0.1.0"
   },
   "devDependencies": {
-    "rollup": "../node_modules/rollup",
+    "@windtunnel/assert": "^0.1.0",
     "@windtunnel/cli": "^0.1.0",
-    "@windtunnel/assert": "^0.1.0"
+    "rollup": "../node_modules/rollup"
   },
   "peerDependencies": {},
   "optionalDependencies": {}
