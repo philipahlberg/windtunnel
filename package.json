@@ -27,6 +27,7 @@
   "homepage": "https://github.com/philipahlberg/windtunnel#readme",
   "scripts": {
     "postinstall": "node scripts/install.mjs",
+    "uninstall": "node scripts/uninstall.mjs",
     "build": "node scripts/build.mjs",
     "test": "node scripts/test.mjs",
     "version": "node scripts/version.mjs",
