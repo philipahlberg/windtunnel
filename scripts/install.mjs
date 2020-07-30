@@ -20,7 +20,11 @@ const readFile = util.promisify(fs.readFile);
       }
     }));
 
-    const packages = projects.map(project => project.package.name);
+    const packages = projects.map((project) => project.package.name);
+    const packageMap = projects.reduce((map, project) => ({
+      ...map,
+      [project.package.name]: project.directory,
+    }), {});
 
     for (const project of projects) {
       // Install the project's dependencies
@@ -42,22 +46,17 @@ const readFile = util.promisify(fs.readFile);
       // And link all of those dependencies
       for (const dependency of localDependencies) {
         console.log(`Linking ${dependency} into ${directory}...`);
-        const link = await run(`cd ${directory} && npm link ${dependency}`);
+        const location = `../${packageMap[dependency]}`;
+        const link = await run(`cd ${directory} && npm link ${location}`);
         console.error(link.stderr);
         console.log(link.stdout);
       }
 
-      // Build the package to make it ready to be linked against
+      // Build the package
       console.log(`Building ${project.package.name}...`);
       const build = await run(`cd ${directory} && npm run build`);
       console.error(build.stderr);
       console.log(build.stdout);
-
-      // Lastly, make the project available for linking into other projects
-      console.log(`Preparing ${project.package.name} for linking...`);
-      const link = await run(`cd ${directory} && npm link`);
-      console.error(link.stderr);
-      console.log(link.stdout);
     }
     process.exit(0);
   } catch (error) {
