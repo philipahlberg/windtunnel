@@ -28,7 +28,7 @@ const reportResult = (result: TimeResult) => {
   console.log(`${result.name}: ${hertz.toFixed(hertz < 100 ? 2 : 0)} ops/sec ± ${rme.toFixed(2)}% (${size} run${size === 1 ? '' : 's'} sampled)`);
 };
 
-export const main = async (file: string) => {
+export const time = async (file: string) => {
   const mod = await importModule(file);
   const report = timeModule(mod);
   reportResults(report);

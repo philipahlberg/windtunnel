@@ -56,7 +56,7 @@ const exitProcess = (report: TestReport) => {
 	process.exit(exitCode);
 };
 
-export const main = async (file: string) => {
+export const test = async (file: string) => {
   const mod = await importModule(file);
   const report = await testModule(mod);
   reportResults(report);

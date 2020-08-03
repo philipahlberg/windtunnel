@@ -1,5 +1,6 @@
-import { main as time } from './time';
-import { main as test } from './test';
+import { time } from './time';
+import { test } from './test';
+import { help } from './help';
 
 (async () => {
 	const command = process.argv[2];
@@ -10,6 +11,9 @@ import { main as test } from './test';
 			break;
 		case 'time':
 			await time(file);
+			break;
+		default:
+			help();
 			break;
 	}
 })();
