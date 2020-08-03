@@ -26,15 +26,15 @@
   "homepage": "https://github.com/philipahlberg/windtunnel#readme",
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "test": "windtunnel tests/index.mjs"
+    "test": "windtunnel test tests/index.mjs"
   },
   "dependencies": {
     "@windtunnel/colors": "^0.2.0",
     "@windtunnel/core": "^0.2.0"
   },
   "devDependencies": {
-    "@windtunnel/assert": "^0.1.0",
-    "@windtunnel/cli": "^0.1.0",
+    "@windtunnel/assert": "^0.2.0",
+    "@windtunnel/cli": "^0.2.0",
     "rollup": "../node_modules/rollup"
   },
   "peerDependencies": {},
