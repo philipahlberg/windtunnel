@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
 import { testModule, TestModule, TestResult, TestReport } from '@windtunnel/core';
-import { format, Attributes, ForegroundColors } from '@windtunnel/colors';
+import { format, ForegroundColors, Attributes } from '@windtunnel/colors';
 
 const importModule = async (arg: string): Promise<TestModule> => {
 	const file = resolve(arg);
@@ -10,45 +10,43 @@ const importModule = async (arg: string): Promise<TestModule> => {
 	return mod;
 };
 
-const reportPassed = (passed: TestResult[]) => {
-	const message = `${passed.length} passed.`;
+const reportResults = (results: TestResult[]) => {
+	console.log('');
+	for (const result of results) {
+		const status = formatStatus(result);
+		const message = `${status} ${result.name} (${result.duration} ms)`;
+		console.log(message);
+	}
+};
 
-	if (passed.length > 0) {
-		console.log(format(message, {
+const formatStatus = (result: TestResult): string => {
+	if (result.passed) {
+		return format(' PASSED ', {
 			foreground: ForegroundColors.Green,
-		}));
+			attributes: new Set([Attributes.Invert]),
+		});
 	} else {
-		console.log(format(message, {
-			attributes: new Set([Attributes.Dimmed])
-		}));
+		return format(' FAILED ', {
+			foreground: ForegroundColors.Red,
+			attributes: new Set([Attributes.Invert]),
+		});
 	}
 };
 
 const reportFailed = (failed: TestResult[]) => {
-	const message = `${failed.length} failed.`;
-
 	if (failed.length > 0) {
-		console.log(format(message, {
-			foreground: ForegroundColors.Red,
-		}));
-
 		const failures = failed.map(result => {
 			return `${result.name}: ${result.message}`;
 		});
-
 		console.log('');
 		console.log(failures.join('\n'));
-	} else {
-		console.log(format(message, {
-			attributes: new Set([Attributes.Dimmed]),
-		}));
 	}
 };
 
-const reportResults = (report: TestReport) => {
+const reportSummary = (report: TestReport) => {
 	console.log('');
-	reportPassed(report.passed);
-	reportFailed(report.failed);
+	console.log(`${report.passed.length} passed.`);
+	console.log(`${report.failed.length} failed.`);
 };
 
 const exitProcess = (report: TestReport) => {
@@ -58,7 +56,9 @@ const exitProcess = (report: TestReport) => {
 
 export const test = async (file: string) => {
   const mod = await importModule(file);
-  const report = await testModule(mod);
-  reportResults(report);
+	const report = await testModule(mod);
+	reportResults([...report.passed, ...report.failed]);
+	reportFailed(report.failed);
+	reportSummary(report);
   exitProcess(report);
 };
