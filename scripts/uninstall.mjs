@@ -28,9 +28,6 @@ const removeDirectory = util.promisify(fs.rmdir);
 
     for (const project of projects) {
       const directory = project.directory;
-      const unlink = await run(`cd ${directory} && npm unlink`);
-      console.error(unlink.stderr);
-      console.log(unlink.stdout);
       await removeDirectory(`${directory}/node_modules`, {
         recursive: true,
       });
