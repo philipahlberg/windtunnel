@@ -10,12 +10,16 @@ export function testAssert() {
 
 export function testAssertEqual() {
   internal.assertEqual(1, 1, 'should work for numbers (1/2)');
+  internal.assertEqual(1n, 1n, 'should work for bigints (1/2)');
   internal.assertEqual('foo', 'foo', 'should work for strings (1/2)');
   internal.assertEqual([1, 2, 3], [1, 2, 3], 'should work for arrays (1/2)');
   internal.assertEqual({ a: 1, b: 2 }, { a: 1, b: 2 }, 'should work for objects (1/2)');
   external.assertThrows(() => {
     internal.assertEqual(1, 2, '1 === 2');
   }, 'should work for numbers (2/2)');
+  external.assertThrows(() => {
+    internal.assertEqual(1n, 2n, '1n === 2n');
+  }, 'should work for bigints (2/2)');
   external.assertThrows(() => {
     internal.assertEqual('foo', 'bar', 'foo === bar');
   }, 'should work for strings (2/2)');

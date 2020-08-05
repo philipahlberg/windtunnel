@@ -4,9 +4,17 @@ export const assert = (t: boolean, message: string) => {
   }
 };
 
+const stringify = (_key: string, value: unknown) => {
+  if (typeof value === 'bigint') {
+    return `${value.toString()}n`;
+  } else {
+    return value;
+  }
+};
+
 export const assertEqual = <T>(actual: T, expected: T, message: string) => {
-  const lhs = JSON.stringify(actual);
-  const rhs = JSON.stringify(expected);
+  const lhs = JSON.stringify(actual, stringify);
+  const rhs = JSON.stringify(expected, stringify);
   if (lhs !== rhs) {
     const output = [
       message,
