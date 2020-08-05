@@ -1,32 +1,13 @@
 {
   "name": "windtunnel",
-  "version": "0.4.0",
-  "description": "A modern & minimalistic testing library and CLI",
-  "bin": {
-    "windtunnel": "windtunnel-cli/dist/index.mjs"
-  },
-  "directories": {
-    "example": "examples"
-  },
+  "private": true,
   "workspaces": [
     "windtunnel-core",
     "windtunnel-assert",
     "windtunnel-colors",
     "windtunnel-cli"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/philipahlberg/windtunnel.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/philipahlberg/windtunnel/issues"
-  },
-  "homepage": "https://github.com/philipahlberg/windtunnel#readme",
   "scripts": {
-    "postinstall": "node scripts/install.mjs",
     "uninstall": "node scripts/uninstall.mjs",
     "build": "node scripts/build.mjs",
     "test": "node scripts/test.mjs",

@@ -3,7 +3,6 @@ import process from 'process';
 import util from 'util';
 import fs from 'fs';
 
-const run = util.promisify(child_process.exec);
 const readFile = util.promisify(fs.readFile);
 const removeDirectory = util.promisify(fs.rmdir);
 

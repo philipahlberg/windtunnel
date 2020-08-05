@@ -29,7 +29,7 @@
   "devDependencies": {
     "@windtunnel/cli": "0.2.0",
     "@windtunnel/assert": "0.2.0",
-    "rollup": "../node_modules/rollup"
+    "rollup": "^2.23.0"
   },
   "peerDependencies": {},
   "optionalDependencies": {}
