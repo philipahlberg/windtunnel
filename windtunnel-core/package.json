@@ -1,6 +1,6 @@
 {
   "name": "@windtunnel/core",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "The windtunnel core library",
   "main": "dist/index.mjs",
