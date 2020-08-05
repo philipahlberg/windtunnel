@@ -11,7 +11,7 @@ export interface TestResult {
   name: string;
   passed: boolean;
   message: string;
-  duration: number;
+  duration: bigint;
 }
 
 export const testModule = async (mod: TestModule): Promise<TestReport> => {
@@ -31,7 +31,7 @@ const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
   try {
     await fn();
     const end = process.hrtime.bigint();
-    const duration = Number((end - start) / 1_000_000n);
+    const duration = (end - start) / 1_000_000n;
     return {
       name: name,
       passed: true,
@@ -40,7 +40,7 @@ const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
     };
   } catch (error) {
     const end = process.hrtime.bigint();
-    const duration = Number((end - start) / 1_000_000n);
+    const duration = (end - start) / 1_000_000n;
     return {
       name: name,
       passed: false,
