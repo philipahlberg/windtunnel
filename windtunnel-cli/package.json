@@ -29,12 +29,12 @@
     "test": "windtunnel test tests/index.mjs"
   },
   "dependencies": {
-    "@windtunnel/colors": "^0.3.0",
-    "@windtunnel/core": "^0.3.0"
+    "@windtunnel/colors": "0.3.0",
+    "@windtunnel/core": "0.3.0"
   },
   "devDependencies": {
-    "@windtunnel/assert": "^0.3.0",
-    "@windtunnel/cli": "^0.3.0",
+    "@windtunnel/assert": "0.2.0",
+    "@windtunnel/cli": "0.2.0",
     "rollup": "../node_modules/rollup"
   },
   "peerDependencies": {},
