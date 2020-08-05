@@ -1,6 +1,6 @@
 {
   "name": "@windtunnel/cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "The windtunnel command-line interface",
   "main": "dist/index.mjs",
@@ -29,8 +29,8 @@
     "test": "windtunnel test tests/index.mjs"
   },
   "dependencies": {
-    "@windtunnel/colors": "0.3.0",
-    "@windtunnel/core": "0.3.0"
+    "@windtunnel/colors": "0.4.0",
+    "@windtunnel/core": "0.4.0"
   },
   "devDependencies": {
     "@windtunnel/assert": "0.2.0",
