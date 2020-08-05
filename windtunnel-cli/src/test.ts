@@ -1,7 +1,12 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
-import { testModule, TestModule, TestResult, TestReport } from '@windtunnel/core';
+import { testModule, TestModule, TestResult } from '@windtunnel/core';
 import { format, ForegroundColors, Attributes } from '@windtunnel/colors';
+
+interface TestReport {
+	passed: TestResult[];
+	failed: TestResult[];
+}
 
 const importModule = async (arg: string): Promise<TestModule> => {
 	const file = resolve(arg);
@@ -10,13 +15,24 @@ const importModule = async (arg: string): Promise<TestModule> => {
 	return mod;
 };
 
-const reportResults = (results: TestResult[]) => {
+const reportResults = async (results: AsyncIterable<TestResult>): Promise<TestReport> => {
+	const passed = [];
+	const failed = [];
 	console.log('');
-	for (const result of results) {
+	for await (const result of results) {
 		const status = formatStatus(result);
-		const message = `${status} ${result.name} (${result.duration} ms)`;
+		const message = `${status} ${result.name}`;
 		console.log(message);
+		if (result.passed) {
+			passed.push(result);
+		} else {
+			failed.push(result);
+		};
 	}
+	return {
+		passed,
+		failed,
+	};
 };
 
 const formatStatus = (result: TestResult): string => {
@@ -33,9 +49,9 @@ const formatStatus = (result: TestResult): string => {
 	}
 };
 
-const reportFailed = (failed: TestResult[]) => {
-	if (failed.length > 0) {
-		const failures = failed.map(result => {
+const reportFailed = (report: TestReport) => {
+	if (report.failed.length > 0) {
+		const failures = report.failed.map((result) => {
 			return `${result.name}: ${result.message}`;
 		});
 		console.log('');
@@ -56,9 +72,9 @@ const exitProcess = (report: TestReport) => {
 
 export const test = async (file: string) => {
   const mod = await importModule(file);
-	const report = await testModule(mod);
-	reportResults([...report.passed, ...report.failed]);
-	reportFailed(report.failed);
+	const results = testModule(mod);
+	const report = await reportResults(results);
+	reportFailed(report);
 	reportSummary(report);
   exitProcess(report);
 };

@@ -25,7 +25,9 @@
     "build": "rollup -c rollup.config.js",
     "test": "windtunnel test tests/index.mjs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "nurburgring": "^0.1.1"
+  },
   "devDependencies": {
     "@windtunnel/assert": "0.2.0",
     "@windtunnel/cli": "0.2.0",
