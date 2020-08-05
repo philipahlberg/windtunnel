@@ -8,16 +8,11 @@ export async function testSyncSuccess() {
     },
   });
 
-  assertEqual(report, {
-    passed: [
-      {
-        name: 'syncSuccess',
-        passed: true,
-        message: 'Passed.',
-      },
-    ],
-    failed: [],
-  });
+  assertEqual(report.passed.length, 1);
+  assertEqual(report.failed.length, 0);
+  assertEqual(report.passed[0].name, 'syncSuccess');
+  assertEqual(report.passed[0].passed, true);
+  assertEqual(report.passed[0].message, 'Passed.');
 }
 
 export async function testAsyncSuccess() {
@@ -28,16 +23,11 @@ export async function testAsyncSuccess() {
     },
   });
 
-  assertEqual(report, {
-    passed: [
-      {
-        name: 'asyncSuccess',
-        passed: true,
-        message: 'Passed.',
-      },
-    ],
-    failed: [],
-  });
+  assertEqual(report.passed.length, 1);
+  assertEqual(report.failed.length, 0);
+  assertEqual(report.passed[0].name, 'asyncSuccess');
+  assertEqual(report.passed[0].passed, true);
+  assertEqual(report.passed[0].message, 'Passed.');
 }
 
 export async function testSyncFail() {
@@ -47,16 +37,11 @@ export async function testSyncFail() {
     },
   });
 
-  assertEqual(report, {
-    passed: [],
-    failed: [
-      {
-        name: 'syncFail',
-        passed: false,
-        message: 'false == true',
-      },
-    ],
-  });
+  assertEqual(report.passed.length, 0);
+  assertEqual(report.failed.length, 1);
+  assertEqual(report.failed[0].name, 'syncFail');
+  assertEqual(report.failed[0].passed, false);
+  assertEqual(report.failed[0].message, 'false == true');
 }
 
 export async function testAsyncFail() {
@@ -66,17 +51,12 @@ export async function testAsyncFail() {
       assert(false, 'false == true');
     },
   });
-
-  assertEqual(report, {
-    passed: [],
-    failed: [
-      {
-        name: 'asyncFail',
-        passed: false,
-        message: 'false == true',
-      },
-    ],
-  });
+  
+  assertEqual(report.passed.length, 0);
+  assertEqual(report.failed.length, 1);
+  assertEqual(report.failed[0].name, 'asyncFail');
+  assertEqual(report.failed[0].passed, false);
+  assertEqual(report.failed[0].message, 'false == true');
 }
 
 export async function testMixed() {
@@ -97,30 +77,18 @@ export async function testMixed() {
     },
   });
 
-  assertEqual(report, {
-    passed: [
-      {
-        name: 'syncSuccess',
-        passed: true,
-        message: 'Passed.',
-      },
-      {
-        name: 'asyncSuccess',
-        passed: true,
-        message: 'Passed.',
-      },
-    ],
-    failed: [
-      {
-        name: 'syncFail',
-        passed: false,
-        message: 'false == true',
-      },
-      {
-        name: 'asyncFail',
-        passed: false,
-        message: 'false == true',
-      },
-    ]
-  });
+  assertEqual(report.passed.length, 2);
+  assertEqual(report.failed.length, 2);
+  assertEqual(report.passed[0].name, 'syncSuccess');
+  assertEqual(report.passed[0].passed, true);
+  assertEqual(report.passed[0].message, 'Passed.');
+  assertEqual(report.passed[1].name, 'asyncSuccess');
+  assertEqual(report.passed[1].passed, true);
+  assertEqual(report.passed[1].message, 'Passed.');
+  assertEqual(report.failed[0].name, 'syncFail');
+  assertEqual(report.failed[0].passed, false);
+  assertEqual(report.failed[0].message, 'false == true');
+  assertEqual(report.failed[1].name, 'asyncFail');
+  assertEqual(report.failed[1].passed, false);
+  assertEqual(report.failed[1].message, 'false == true');
 }
