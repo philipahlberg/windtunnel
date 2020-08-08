@@ -28,10 +28,24 @@ const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
       message: 'Passed.',
     };
   } catch (error) {
-    return {
-      name: name,
-      passed: false,
-      message: error.message,
-    };
+    if (error.stack != null) {
+      return {
+        name,
+        passed: false,
+        message: error.stack,
+      }
+    } else if (error.message != null) {
+      return {
+        name,
+        passed: false,
+        message: error.message,
+      }
+    } else {
+      return {
+        name,
+        passed: false,
+        message: String(error),
+      };
+    }
   }
 };

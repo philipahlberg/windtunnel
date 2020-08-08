@@ -17,11 +17,12 @@ export async function testSyncSuccess() {
   });
 
   const results = await collect(run);
+  const syncSuccess = results[0];
 
   assertEqual(results.length, 1);
-  assertEqual(results[0].name, 'syncSuccess');
-  assertEqual(results[0].passed, true);
-  assertEqual(results[0].message, 'Passed.');
+  assertEqual(syncSuccess.name, 'syncSuccess');
+  assertEqual(syncSuccess.passed, true);
+  assertEqual(syncSuccess.message, 'Passed.');
 }
 
 export async function testAsyncSuccess() {
@@ -33,11 +34,12 @@ export async function testAsyncSuccess() {
   });
 
   const results = await collect(run);
+  const asyncSuccess = results[0];
 
   assertEqual(results.length, 1);
-  assertEqual(results[0].name, 'asyncSuccess');
-  assertEqual(results[0].passed, true);
-  assertEqual(results[0].message, 'Passed.');
+  assertEqual(asyncSuccess.name, 'asyncSuccess');
+  assertEqual(asyncSuccess.passed, true);
+  assertEqual(asyncSuccess.message, 'Passed.');
 }
 
 export async function testSyncFail() {
@@ -48,11 +50,18 @@ export async function testSyncFail() {
   });
 
   const results = await collect(run);
+  const syncFail = results[0];
 
   assertEqual(results.length, 1);
-  assertEqual(results[0].name, 'syncFail');
-  assertEqual(results[0].passed, false);
-  assertEqual(results[0].message, 'false == true');
+  assertEqual(syncFail.name, 'syncFail');
+  assertEqual(syncFail.passed, false);
+
+  const lines = syncFail.message.split('\n');
+  assert(lines[0].includes('false == true'));
+  assert(lines[1].includes('at assert'));
+  assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
+  assert(lines[2].includes('at syncFail'));
+  assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testAsyncFail() {
@@ -64,11 +73,18 @@ export async function testAsyncFail() {
   });
 
   const results = await collect(run);
+  const asyncFail = results[0];
   
   assertEqual(results.length, 1);
-  assertEqual(results[0].name, 'asyncFail');
-  assertEqual(results[0].passed, false);
-  assertEqual(results[0].message, 'false == true');
+  assertEqual(asyncFail.name, 'asyncFail');
+  assertEqual(asyncFail.passed, false);
+
+  const lines = asyncFail.message.split('\n');
+  assert(lines[0].includes('false == true'));
+  assert(lines[1].includes('at assert'));
+  assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
+  assert(lines[2].includes('at asyncFail'));
+  assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testMixed() {
@@ -108,9 +124,9 @@ export async function testMixed() {
 
   assertEqual(syncFail.name, 'syncFail');
   assertEqual(syncFail.passed, false);
-  assertEqual(syncFail.message, 'false == true');
+  assert(syncFail.message.includes('false == true'));
 
   assertEqual(asyncFail.name, 'asyncFail');
   assertEqual(asyncFail.passed, false);
-  assertEqual(asyncFail.message, 'false == true');
+  assert(asyncFail.message.includes('false == true'));
 }
