@@ -4,24 +4,47 @@ export const assert = (t: boolean, message: string) => {
   }
 };
 
-const stringify = (_key: string, value: unknown) => {
-  if (typeof value === 'bigint') {
-    return `${value.toString()}n`;
-  } else {
-    return value;
+const format = <T>(value: T): string => {
+  switch (typeof value) {
+    case 'bigint':
+      return `${value}n`;
+    case 'boolean':
+      return `${value}`;
+    case 'function':
+      return `Function(${value.name})`
+    case 'number':
+      return `${value}`;
+    case 'object':
+      if (Array.isArray(value)) {
+        return `[ ${value.map((v) => format(v)).join(', ')} ]`;
+      } else {
+        return `{ ${Object.entries(value)
+            .map(([key, val]) => `${key}: ${format(val)}`)
+            .join(', ')} }`;
+      }
+    case 'string':
+      return `"${value}"`;
+    case 'symbol':
+      return `Symbol(${value.toString()})`;
+    case 'undefined':
+      return 'undefined';
+    default:
+      return '?';
   }
 };
 
-export const assertEqual = <T>(actual: T, expected: T, message: string) => {
-  const lhs = JSON.stringify(actual, stringify);
-  const rhs = JSON.stringify(expected, stringify);
+export const assertEqual = <T>(actual: T, expected: T, message?: string) => {
+  const lhs = format(actual);
+  const rhs = format(expected);
   if (lhs !== rhs) {
+    const explanation = message ?? 'Expected values to be equal:';
     const output = [
-      message,
-      `    actual:`,
-      `    ${lhs}`,
-      `    expected:`,
-      `    ${rhs}`
+      '',
+      '',
+      `  ${explanation}`,
+      `    actual:   ${lhs}`,
+      `    expected: ${rhs}`,
+      '',
     ].join('\n');
 
     throw new Error(output);
