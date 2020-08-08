@@ -55,14 +55,16 @@ const reportFailed = (report: TestReport) => {
 			return `${result.name}: ${result.message}`;
 		});
 		console.log('');
-		console.log(failures.join('\n'));
+		console.log(failures.join('\n\n'));
 	}
 };
 
 const reportSummary = (report: TestReport) => {
 	console.log('');
 	console.log(`${report.passed.length} passed.`);
-	console.log(`${report.failed.length} failed.`);
+	if (report.failed.length > 0) {
+		console.log(`${report.failed.length} failed.`);
+	}
 };
 
 const exitProcess = (report: TestReport) => {
