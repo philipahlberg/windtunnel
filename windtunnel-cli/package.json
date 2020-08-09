@@ -33,8 +33,8 @@
     "@windtunnel/core": "0.5.0"
   },
   "devDependencies": {
-    "@windtunnel/assert": "0.3.0",
-    "@windtunnel/cli": "0.3.0",
+    "@windtunnel/assert": "0.4.0",
+    "@windtunnel/cli": "0.4.0",
     "rollup": "^2.23.0"
   },
   "peerDependencies": {},
