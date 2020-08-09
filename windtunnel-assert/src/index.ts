@@ -4,7 +4,7 @@ export const assert = (t: boolean, message: string) => {
   }
 };
 
-const format = <T>(value: T): string => {
+const format = (value: unknown): string => {
   switch (typeof value) {
     case 'bigint':
       return `${value}n`;
@@ -15,7 +15,9 @@ const format = <T>(value: T): string => {
     case 'number':
       return `${value}`;
     case 'object':
-      if (Array.isArray(value)) {
+      if (value === null) {
+        return 'null';
+      } else if (Array.isArray(value)) {
         return `[ ${value.map((v) => format(v)).join(', ')} ]`;
       } else {
         return `{ ${Object.entries(value)
