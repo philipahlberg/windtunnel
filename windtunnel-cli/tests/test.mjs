@@ -8,14 +8,12 @@ export async function testEmpty() {
   const output = await run('node dist/index.mjs test tests/cases/empty.mjs');
   assert(output.stderr === '');
   assert(output.stdout.includes('0 passed.'));
-  assert(output.stdout.includes('0 failed.'));
 }
 
 export async function testSuccess() {
   const output = await run('node dist/index.mjs test tests/cases/success.mjs');
   assert(output.stderr === '');
   assert(output.stdout.includes('1 passed.'));
-  assert(output.stdout.includes('0 failed.'));
 }
 
 export async function testFail() {
