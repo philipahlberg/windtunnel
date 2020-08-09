@@ -49,28 +49,28 @@
   dependencies:
     "@types/node" "*"
 
-"@windtunnel/assert@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@windtunnel/assert/-/assert-0.2.0.tgz#b07f69abe1d9515efbb8db45070676d1e5d70f87"
-  integrity sha512-hXRMVoyuc0YnbRlQkDPr6GS8kiP6+F0sgjCMn4/QBKO3S4M/C4kMXZcvmpWk3XCHkpBZJY+JvxKS67gzYOxLIA==
+"@windtunnel/assert@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@windtunnel/assert/-/assert-0.3.0.tgz#a9223d5793ff4cd54b4e9db0730ad6dc98ed60f9"
+  integrity sha512-dHK/FfHtpprVDCoSUU9l2V2+PjRqmUwJUwmxFYOLz6B3YuspTrrLlBvBty4V1zJDB9gKMBA0ZcoThBgX787zaA==
 
-"@windtunnel/cli@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@windtunnel/cli/-/cli-0.2.0.tgz#72de680e04b01a34fe677a15d524f6f85b7abe6f"
-  integrity sha512-vsL7IzVYxmNvMtmM+UWWVPcywwgjZQhSpDtJO71XojPIlHkly/WOq7iRGKZ7z6ZwR9CXmqRb3G2P4EkC0yeZaA==
+"@windtunnel/cli@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@windtunnel/cli/-/cli-0.3.0.tgz#2477e30f7d65777fa71bc653dc829db41c88791e"
+  integrity sha512-ZbhbOb4bhZM4oT12cca9xzcLIxaobxJ0iMPHf27pQJjlTEoKCcVqohUsEsgQ2X+MvL9r1TPM7FmiztGDuxC9uQ==
   dependencies:
-    "@windtunnel/colors" "^0.2.0"
-    "@windtunnel/core" "^0.2.0"
+    "@windtunnel/colors" "^0.3.0"
+    "@windtunnel/core" "^0.3.0"
 
-"@windtunnel/colors@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@windtunnel/colors/-/colors-0.2.0.tgz#a43386268d50aeda7dad14dfe07d9e4ec625da59"
-  integrity sha512-oGdIAUrj7ytDbtI3xngy6lmjXoPpJsq0FLlrDNFChmowF7eTYhT/yjba4LUg371oSXEQ2qbKDTbb8jTDWwtm4g==
+"@windtunnel/colors@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@windtunnel/colors/-/colors-0.3.0.tgz#6bb2ffb6ab4d42abf557d3f389190007f7f8c449"
+  integrity sha512-1jm4+hN97MdWkhNPwb5vEdwrV+Yo99Glk8r+SHl7wbiGQjfk9v5uytV8FdhJCQoP53dadbNf2tugc3KS/um1nQ==
 
-"@windtunnel/core@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@windtunnel/core/-/core-0.2.0.tgz#373e5ae03879556adf7d03ea2005c800d3d95d12"
-  integrity sha512-EM77NqRMnzrEeA07Rv9SmKyUaWjCgnH7PhSvSGkrNlckc5q+JJbXNGODFtkoz5hpr50vtMKRUmph/hY7PF8h8w==
+"@windtunnel/core@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@windtunnel/core/-/core-0.3.0.tgz#01a7fc593c72376c2fcb2f4be6bec5c9b0cf7382"
+  integrity sha512-fgKb/4j3Qlyb8GS09t9rCbrWcVggAtCTwFhZtYrY8i09CyQQ4bKY/t+WCpMV397XyBz7wfH4Lrf9ZTjzPU6I4Q==
 
 builtin-modules@^3.1.0:
   version "3.1.0"
