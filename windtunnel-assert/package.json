@@ -1,6 +1,6 @@
 {
   "name": "@windtunnel/assert",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "The windtunnel assertion library",
   "type": "module",
