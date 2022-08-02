@@ -30,8 +30,8 @@
     "nurburgring": "^0.1.1"
   },
   "devDependencies": {
-    "@windtunnel/assert": "0.6.0",
-    "@windtunnel/cli": "0.6.0",
+    "@windtunnel/assert": "0.6.2",
+    "@windtunnel/cli": "0.6.2",
     "rollup": "^2.35.1"
   },
   "peerDependencies": {},

@@ -67,10 +67,6 @@ export async function testSyncFail() {
 
 	const lines = syncFail.message.split('\n');
 	assert(lines[0].includes('false == true'));
-	assert(lines[1].includes('at assert'));
-	assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
-	assert(lines[2].includes('at syncFail'));
-	assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testAsyncFail() {
@@ -93,10 +89,6 @@ export async function testAsyncFail() {
 
 	const lines = asyncFail.message.split('\n');
 	assert(lines[0].includes('false == true'));
-	assert(lines[1].includes('at assert'));
-	assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
-	assert(lines[2].includes('at asyncFail'));
-	assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testMixed() {
