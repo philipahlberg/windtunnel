@@ -60,7 +60,7 @@
 
 "@windtunnel/assert@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-assert":
   "resolved" "file:windtunnel-assert"
-  "version" "0.5.1"
+  "version" "0.6.0"
 
 "@windtunnel/cli@0.4.0":
   "integrity" "sha512-5iqHhv+/yaTDGGIxfXm/JIqhIAxBrUsXcpGael8Dg96roBalcoo/6eSYUQgyoyh4Y3t3lhlj+O6eZBD8kZ8/7Q=="
@@ -72,7 +72,7 @@
 
 "@windtunnel/cli@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-cli":
   "resolved" "file:windtunnel-cli"
-  "version" "0.5.1"
+  "version" "0.6.0"
   dependencies:
     "@windtunnel/colors" "0.5.1"
     "@windtunnel/core" "0.5.1"
@@ -82,9 +82,14 @@
   "resolved" "https://registry.npmjs.org/@windtunnel/colors/-/colors-0.4.0.tgz"
   "version" "0.4.0"
 
-"@windtunnel/colors@0.5.1", "@windtunnel/colors@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-colors":
-  "resolved" "file:windtunnel-colors"
+"@windtunnel/colors@0.5.1":
+  "integrity" "sha512-s7ZGpSe3Q5uEWCVwpTkQq3/B/aM/FalBMRqD2eP6YNDLdutMlwl5ls4R2RWPl1EX8lY4IvHVHFCaw7kfUSHcog=="
+  "resolved" "https://registry.npmjs.org/@windtunnel/colors/-/colors-0.5.1.tgz"
   "version" "0.5.1"
+
+"@windtunnel/colors@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-colors":
+  "resolved" "file:windtunnel-colors"
+  "version" "0.6.0"
 
 "@windtunnel/core@0.4.0":
   "integrity" "sha512-rZqXZC+vM/X5QznJriNQYU03I+sX8afMKZ1I3PFzSYrxmsrdxLvgdDHTynHN0sMdDwudmxrgf7TU1o25CD/otw=="
@@ -93,9 +98,16 @@
   dependencies:
     "nurburgring" "^0.1.1"
 
-"@windtunnel/core@0.5.1", "@windtunnel/core@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-core":
-  "resolved" "file:windtunnel-core"
+"@windtunnel/core@0.5.1":
+  "integrity" "sha512-muSsPqvKwwEmYnIxECZ3hrGWLGoncXq20k4Sg198qRWSn5cMMUeYOMF8I6kdlR0vnWJrp51MbBI0Ro/R9qBHlA=="
+  "resolved" "https://registry.npmjs.org/@windtunnel/core/-/core-0.5.1.tgz"
   "version" "0.5.1"
+  dependencies:
+    "nurburgring" "^0.1.1"
+
+"@windtunnel/core@file:C:\\Users\\phili\\Documents\\GitHub\\windtunnel\\windtunnel-core":
+  "resolved" "file:windtunnel-core"
+  "version" "0.6.0"
   dependencies:
     "nurburgring" "^0.1.1"
 
@@ -161,19 +173,12 @@
     "is-core-module" "^2.1.0"
     "path-parse" "^1.0.6"
 
-"rollup@^1.20.0||^2.0.0", "rollup@^2.14.0", "rollup@^2.42.0", "rollup@^2.53.1":
+"rollup@^1.20.0||^2.0.0", "rollup@^2.14.0", "rollup@^2.35.1", "rollup@^2.42.0", "rollup@^2.53.1":
   "integrity" "sha512-yiTCvcYXZEulNWNlEONOQVlhXA/hgxjelFSjNcrwAAIfYx/xqjSHwqg/cCaWOyFRKr+IQBaXwt723m8tCaIUiw=="
   "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.53.1.tgz"
   "version" "2.53.1"
   optionalDependencies:
     "fsevents" "~2.3.2"
-
-"rollup@^2.35.1":
-  "integrity" "sha512-q5KxEyWpprAIcainhVy6HfRttD9kutQpHbeqDTWnqAFNJotiojetK6uqmcydNMymBEtC4I8bCYR+J3mTMqeaUA=="
-  "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.35.1.tgz"
-  "version" "2.35.1"
-  optionalDependencies:
-    "fsevents" "~2.1.2"
 
 "tslib@*", "tslib@^2.3.0":
   "integrity" "sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg=="
