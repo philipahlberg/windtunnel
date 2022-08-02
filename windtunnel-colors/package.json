@@ -1,6 +1,6 @@
 {
   "name": "@windtunnel/colors",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "A simple & robust terminal color library",
   "type": "module",
@@ -28,8 +28,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@windtunnel/assert": "0.4.0",
-    "@windtunnel/cli": "0.4.0",
+    "@windtunnel/assert": "0.6.0",
+    "@windtunnel/cli": "0.6.0",
     "rollup": "^2.35.1"
   },
   "peerDependencies": {},
