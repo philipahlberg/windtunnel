@@ -1,5 +1,5 @@
 export const help = () => {
-  console.log(`
+	console.log(`
   USAGE:
     windtunnel [COMMAND] [FILE]
 

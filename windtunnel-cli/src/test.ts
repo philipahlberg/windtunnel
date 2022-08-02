@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';
-import { testModule, TestModule, TestResult } from '@windtunnel/core';
+import { testModule, TestModule, TestResult, Mode } from '@windtunnel/core';
 import { format, ForegroundColors, Attributes } from '@windtunnel/colors';
 
 interface TestReport {
@@ -8,31 +8,30 @@ interface TestReport {
 	failed: TestResult[];
 }
 
-const importModule = async (arg: string): Promise<TestModule> => {
-	const file = resolve(arg);
-	const url = pathToFileURL(file);
+const importModule = async (path: string): Promise<TestModule> => {
+	const res = resolve(path);
+	const url = pathToFileURL(res);
 	const mod = await import(url.href);
 	return mod;
 };
 
 const reportResults = async (results: AsyncIterable<TestResult>): Promise<TestReport> => {
-	const passed = [];
-	const failed = [];
+	const report: TestReport = {
+		passed: [],
+		failed: [],
+	};
 	console.log('');
 	for await (const result of results) {
 		const status = formatStatus(result);
 		const message = `${status} ${result.name}`;
 		console.log(message);
 		if (result.passed) {
-			passed.push(result);
+			report.passed.push(result);
 		} else {
-			failed.push(result);
+			report.failed.push(result);
 		};
 	}
-	return {
-		passed,
-		failed,
-	};
+	return report;
 };
 
 const formatStatus = (result: TestResult): string => {
@@ -72,11 +71,64 @@ const exitProcess = (report: TestReport) => {
 	process.exit(exitCode);
 };
 
-export const test = async (file: string) => {
-  const mod = await importModule(file);
-	const results = testModule(mod);
+interface Args {
+	path: string,
+	mode: Mode,
+}
+
+const parseArgs = (args: string[]): Args => {
+	let mode: Mode | undefined;
+	let path: string | undefined;
+	for (const arg of args) {
+		switch (arg) {
+			case '--mode':
+				const value = args.shift();
+				switch (value) {
+					case 'concurrent':
+						mode = Mode.Concurrent;
+						break;
+					case 'serial':
+						mode = Mode.Serial;
+						break;
+					default:
+						console.error('Unknown value for option --mode:');
+						console.error(value);
+				}
+				break;
+			default:
+				if (arg.startsWith('--')) {
+					console.error('Unexpected option:');
+					console.error(arg);
+					console.error('help: invoke with --help to see options');
+				} else if (path !== undefined) {
+					console.error('Unexpected argument:');
+					console.error(arg);
+					console.error('help: invoke with --help to see options');
+				} else {
+					path = arg;
+				}
+				break;
+		}
+	}
+
+	if (path !== undefined) {
+		return {
+			path,
+			mode: mode ?? Mode.Concurrent,
+		}
+	} else {
+		console.error('Missing required argument `path`');
+		console.error('help: invoke with --help to see options');
+		process.exit(1);
+	}
+};
+
+export const test = async (args: string[]) => {
+	const options = parseArgs(args);
+	const mod = await importModule(options.path);
+	const results = testModule(mod, { mode: options.mode });
 	const report = await reportResults(results);
 	reportFailed(report);
 	reportSummary(report);
-  exitProcess(report);
+	exitProcess(report);
 };

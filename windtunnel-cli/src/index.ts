@@ -3,14 +3,16 @@ import { test } from './test';
 import { help } from './help';
 
 (async () => {
-	const command = process.argv[2];
-	const file = process.argv[3];
+	const args = process.argv.slice(2);
+
+	const [command, ...input] = args;
+
 	switch (command) {
 		case 'test':
-			await test(file);
+			await test(input);
 			break;
 		case 'time':
-			await time(file);
+			await time(input);
 			break;
 		default:
 			help();

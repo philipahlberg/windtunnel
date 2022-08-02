@@ -9,5 +9,5 @@ export type AsyncFn = () => Promise<void>;
 export type Entry<F> = [string, F];
 
 export const getEntries = <F>(module: Module<F>): Entry<F>[] => {
-  return Object.entries(module);
+	return Object.entries(module);
 };

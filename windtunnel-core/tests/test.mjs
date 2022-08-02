@@ -1,132 +1,147 @@
 import { assert, assertEqual } from '@windtunnel/assert';
-import { testModule } from '../dist/index.mjs';
+import { testModule, Mode } from '../dist/index.mjs';
 
 async function collect(asyncIterable) {
-  const values = [];
-  for await (const value of asyncIterable) {
-    values.push(value);
-  }
-  return values;
+	const values = [];
+	for await (const value of asyncIterable) {
+		values.push(value);
+	}
+	return values;
 }
 
 export async function testSyncSuccess() {
-  const run = testModule({
-    syncSuccess: () => {
-      assert(true, 'true == true');
-    },
-  });
+	const options = {
+		mode: Mode.Concurrent,
+	};
+	const run = testModule({
+		syncSuccess: () => {
+			assert(true, 'true == true');
+		},
+	}, options);
 
-  const results = await collect(run);
-  const syncSuccess = results[0];
+	const results = await collect(run);
+	const syncSuccess = results[0];
 
-  assertEqual(results.length, 1);
-  assertEqual(syncSuccess.name, 'syncSuccess');
-  assertEqual(syncSuccess.passed, true);
-  assertEqual(syncSuccess.message, 'Passed.');
+	assertEqual(results.length, 1);
+	assertEqual(syncSuccess.name, 'syncSuccess');
+	assertEqual(syncSuccess.passed, true);
+	assertEqual(syncSuccess.message, 'Passed.');
 }
 
 export async function testAsyncSuccess() {
-  const run = testModule({
-    asyncSuccess: async () => {
-      await Promise.resolve();
-      assert(true, 'true == true');
-    },
-  });
+	const options = {
+		mode: Mode.Concurrent,
+	};
+	const run = testModule({
+		asyncSuccess: async () => {
+			await Promise.resolve();
+			assert(true, 'true == true');
+		},
+	}, options);
 
-  const results = await collect(run);
-  const asyncSuccess = results[0];
+	const results = await collect(run);
+	const asyncSuccess = results[0];
 
-  assertEqual(results.length, 1);
-  assertEqual(asyncSuccess.name, 'asyncSuccess');
-  assertEqual(asyncSuccess.passed, true);
-  assertEqual(asyncSuccess.message, 'Passed.');
+	assertEqual(results.length, 1);
+	assertEqual(asyncSuccess.name, 'asyncSuccess');
+	assertEqual(asyncSuccess.passed, true);
+	assertEqual(asyncSuccess.message, 'Passed.');
 }
 
 export async function testSyncFail() {
-  const run = testModule({
-    syncFail: () => {
-      assert(false, 'false == true');
-    },
-  });
+	const options = {
+		mode: Mode.Concurrent,
+	};
+	const run = testModule({
+		syncFail: () => {
+			assert(false, 'false == true');
+		},
+	}, options);
 
-  const results = await collect(run);
-  const syncFail = results[0];
+	const results = await collect(run);
+	const syncFail = results[0];
 
-  assertEqual(results.length, 1);
-  assertEqual(syncFail.name, 'syncFail');
-  assertEqual(syncFail.passed, false);
+	assertEqual(results.length, 1);
+	assertEqual(syncFail.name, 'syncFail');
+	assertEqual(syncFail.passed, false);
 
-  const lines = syncFail.message.split('\n');
-  assert(lines[0].includes('false == true'));
-  assert(lines[1].includes('at assert'));
-  assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
-  assert(lines[2].includes('at syncFail'));
-  assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
+	const lines = syncFail.message.split('\n');
+	assert(lines[0].includes('false == true'));
+	assert(lines[1].includes('at assert'));
+	assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
+	assert(lines[2].includes('at syncFail'));
+	assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testAsyncFail() {
-  const run = testModule({
-    asyncFail: async () => {
-      await Promise.resolve();
-      assert(false, 'false == true');
-    },
-  });
+	const options = {
+		mode: Mode.Concurrent,
+	};
+	const run = testModule({
+		asyncFail: async () => {
+			await Promise.resolve();
+			assert(false, 'false == true');
+		},
+	}, options);
 
-  const results = await collect(run);
-  const asyncFail = results[0];
-  
-  assertEqual(results.length, 1);
-  assertEqual(asyncFail.name, 'asyncFail');
-  assertEqual(asyncFail.passed, false);
+	const results = await collect(run);
+	const asyncFail = results[0];
 
-  const lines = asyncFail.message.split('\n');
-  assert(lines[0].includes('false == true'));
-  assert(lines[1].includes('at assert'));
-  assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
-  assert(lines[2].includes('at asyncFail'));
-  assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
+	assertEqual(results.length, 1);
+	assertEqual(asyncFail.name, 'asyncFail');
+	assertEqual(asyncFail.passed, false);
+
+	const lines = asyncFail.message.split('\n');
+	assert(lines[0].includes('false == true'));
+	assert(lines[1].includes('at assert'));
+	assert(lines[1].includes('@windtunnel/assert/dist/index.mjs'));
+	assert(lines[2].includes('at asyncFail'));
+	assert(lines[2].includes('windtunnel-core/tests/test.mjs'));
 }
 
 export async function testMixed() {
-  const run = testModule({
-    syncSuccess: () => {
-      assert(true, 'true == true');
-    },
-    asyncSuccess: async () => {
-      await Promise.resolve();
-      assert(true, 'true == true');
-    },
-    syncFail: () => {
-      assert(false, 'false == true');
-    },
-    asyncFail: async () => {
-      await Promise.resolve();
-      assert(false, 'false == true');
-    },
-  });
+	const options = {
+		mode: Mode.Concurrent,
+	};
+	const run = testModule({
+		syncSuccess: () => {
+			assert(true, 'true == true');
+		},
+		asyncSuccess: async () => {
+			await Promise.resolve();
+			assert(true, 'true == true');
+		},
+		syncFail: () => {
+			assert(false, 'false == true');
+		},
+		asyncFail: async () => {
+			await Promise.resolve();
+			assert(false, 'false == true');
+		},
+	}, options);
 
-  const results = await collect(run);
+	const results = await collect(run);
 
-  const syncSuccess = results.find((result) => result.name === 'syncSuccess');
-  const asyncSuccess = results.find((result) => result.name === 'asyncSuccess');
-  const syncFail = results.find((result) => result.name === 'syncFail');
-  const asyncFail = results.find((result) => result.name === 'asyncFail');
+	const syncSuccess = results.find((result) => result.name === 'syncSuccess');
+	const asyncSuccess = results.find((result) => result.name === 'asyncSuccess');
+	const syncFail = results.find((result) => result.name === 'syncFail');
+	const asyncFail = results.find((result) => result.name === 'asyncFail');
 
-  assertEqual(results.length, 4);
+	assertEqual(results.length, 4);
 
-  assertEqual(syncSuccess.name, 'syncSuccess');
-  assertEqual(syncSuccess.passed, true);
-  assertEqual(syncSuccess.message, 'Passed.');
+	assertEqual(syncSuccess.name, 'syncSuccess');
+	assertEqual(syncSuccess.passed, true);
+	assertEqual(syncSuccess.message, 'Passed.');
 
-  assertEqual(asyncSuccess.name, 'asyncSuccess');
-  assertEqual(asyncSuccess.passed, true);
-  assertEqual(asyncSuccess.message, 'Passed.');
+	assertEqual(asyncSuccess.name, 'asyncSuccess');
+	assertEqual(asyncSuccess.passed, true);
+	assertEqual(asyncSuccess.message, 'Passed.');
 
-  assertEqual(syncFail.name, 'syncFail');
-  assertEqual(syncFail.passed, false);
-  assert(syncFail.message.includes('false == true'));
+	assertEqual(syncFail.name, 'syncFail');
+	assertEqual(syncFail.passed, false);
+	assert(syncFail.message.includes('false == true'));
 
-  assertEqual(asyncFail.name, 'asyncFail');
-  assertEqual(asyncFail.passed, false);
-  assert(asyncFail.message.includes('false == true'));
+	assertEqual(asyncFail.name, 'asyncFail');
+	assertEqual(asyncFail.passed, false);
+	assert(asyncFail.message.includes('false == true'));
 }

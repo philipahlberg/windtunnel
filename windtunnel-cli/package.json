@@ -3,6 +3,7 @@
   "version": "0.5.1",
   "author": "Philip Ahlberg <philipahlberg@users.noreply.github.com>",
   "description": "The windtunnel command-line interface",
+  "type": "module",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
