@@ -14,7 +14,14 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 18
-    - run: npm install -g npm
-    - run: npm install --workspaces
+    - run: npm install -g npm && npm -v
+    - run: npm ci --workspaces
+    - run: |
+        ls -ahl \
+          node_modules \
+          windtunnel-assert/node_modules \
+          windtunnel-cli/node_modules \
+          windtunnel-colors/node_modules \
+          windtunnel-core/node_modules
     - run: npm run build --workspaces
     - run: npm run test --workspaces
