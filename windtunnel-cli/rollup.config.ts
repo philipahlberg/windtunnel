@@ -1,9 +1,10 @@
+import type { RollupOptions } from 'rollup';
 import common from "../rollup.config.js";
-import pkg from "./package.json";
+import * as pkg from "./package.json";
 
 const dependencies = Object.keys(pkg.dependencies ?? {});
 
-export default {
+const options: RollupOptions = {
 	...common,
 	output: {
 		...common.output,
@@ -11,3 +12,5 @@ export default {
 	},
 	external: [...common.external, ...dependencies],
 };
+
+export default options;

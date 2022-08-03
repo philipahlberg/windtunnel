@@ -3,12 +3,15 @@
 		"target": "es2021",
 		"module": "es2020",
 		"moduleResolution": "node",
-		"lib": ["ES2021", "DOM"],
+		"lib": [
+			"ES2021",
+			"DOM"
+		],
 		"declaration": true,
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
-		"importHelpers": true
+		"importHelpers": true,
 	}
 }

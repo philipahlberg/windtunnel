@@ -26,6 +26,7 @@
 		"build": "rollup -c rollup.config.js",
 		"test": "windtunnel test tests/index.mjs"
 	},
+	"dependencies": {},
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@rollup/plugin-typescript": "^8.3.4",
