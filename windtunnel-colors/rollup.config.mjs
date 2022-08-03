@@ -1,4 +1,4 @@
-import { createConfig } from "../rollup.config";
+import { createConfig } from "../rollup.shared";
 import * as pkg from "./package.json";
 
 export default createConfig(pkg);
