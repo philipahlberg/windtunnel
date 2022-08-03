@@ -1,5 +1,5 @@
-import assert from 'assert';
+import assert from "assert";
 
 export function testSuccess() {
-  assert(true);
+	assert(true);
 }

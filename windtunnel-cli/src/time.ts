@@ -1,6 +1,11 @@
-import { resolve } from 'path';
-import { pathToFileURL } from 'url';
-import { timeModule, TimeModule, TimeResult, TimeReport } from '@windtunnel/core';
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import {
+	timeModule,
+	TimeModule,
+	TimeResult,
+	TimeReport,
+} from "@windtunnel/core";
 
 const importModule = async (arg: string): Promise<TimeModule> => {
 	const file = resolve(arg);
@@ -10,7 +15,7 @@ const importModule = async (arg: string): Promise<TimeModule> => {
 };
 
 const reportResults = (report: TimeReport) => {
-	console.log('');
+	console.log("");
 
 	for (const result of report.results) {
 		reportResult(result);
@@ -22,27 +27,33 @@ const reportResult = (result: TimeResult) => {
 	const microseconds = nanoseconds / 1_000n;
 	const milliseconds = microseconds / 1_000n;
 	const seconds = Number(milliseconds) / 1_000;
-	const hertz = (1 / seconds);
+	const hertz = 1 / seconds;
 	const rme = result.relativeMarginOfError;
 	const size = result.sample.length;
-	console.log(`${result.name}: ${hertz.toFixed(hertz < 100 ? 2 : 0)} ops/sec ± ${rme.toFixed(2)}% (${size} run${size === 1 ? '' : 's'} sampled)`);
+	console.log(
+		`${result.name}: ${hertz.toFixed(
+			hertz < 100 ? 2 : 0
+		)} ops/sec ± ${rme.toFixed(2)}% (${size} run${
+			size === 1 ? "" : "s"
+		} sampled)`
+	);
 };
 
 interface Args {
-	path: string,
+	path: string;
 }
 
 const parseArgs = (args: string[]): Args => {
 	let path: string | undefined;
 	for (const arg of args) {
-		if (arg.startsWith('--')) {
-			console.error('Unexpected option:');
+		if (arg.startsWith("--")) {
+			console.error("Unexpected option:");
 			console.error(arg);
-			console.error('help: invoke with --help to see options');
+			console.error("help: invoke with --help to see options");
 		} else if (path !== undefined) {
-			console.error('Unexpected argument:');
+			console.error("Unexpected argument:");
 			console.error(arg);
-			console.error('help: invoke with --help to see options');
+			console.error("help: invoke with --help to see options");
 		} else {
 			path = arg;
 		}
@@ -51,10 +62,10 @@ const parseArgs = (args: string[]): Args => {
 	if (path !== undefined) {
 		return {
 			path,
-		}
+		};
 	} else {
-		console.error('Missing required argument `path`');
-		console.error('help: invoke with --help to see options');
+		console.error("Missing required argument `path`");
+		console.error("help: invoke with --help to see options");
 		process.exit(1);
 	}
 };

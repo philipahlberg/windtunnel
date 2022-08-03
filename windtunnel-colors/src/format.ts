@@ -1,4 +1,4 @@
-import { Options, codes } from './options';
+import { Options, codes } from "./options";
 
 export function format(content: string, options: Options): string {
 	if (
@@ -9,5 +9,5 @@ export function format(content: string, options: Options): string {
 		return content;
 	}
 
-	return `\x1B[${codes(options).join(';')}m${content}\x1B[0m`;
+	return `\x1B[${codes(options).join(";")}m${content}\x1B[0m`;
 }

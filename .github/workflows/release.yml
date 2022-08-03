@@ -1,4 +1,4 @@
-name: publish
+name: release
 
 on:
   release:
@@ -14,6 +14,7 @@ jobs:
           node-version: 18
       - run: node -v && npm -v
       - run: npm ci --workspaces
+      - run: npm run lint
       - run: npm run build --workspaces
       # Link built packages into node_modules
       - run: npm ci --workspaces

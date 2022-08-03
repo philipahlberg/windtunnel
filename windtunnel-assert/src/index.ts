@@ -6,32 +6,32 @@ export const assert = (t: boolean, message: string) => {
 
 const format = (value: unknown): string => {
 	switch (typeof value) {
-		case 'bigint':
+		case "bigint":
 			return `${value}n`;
-		case 'boolean':
+		case "boolean":
 			return `${value}`;
-		case 'function':
-			return `Function(${value.name})`
-		case 'number':
+		case "function":
+			return `Function(${value.name})`;
+		case "number":
 			return `${value}`;
-		case 'object':
+		case "object":
 			if (value === null) {
-				return 'null';
+				return "null";
 			} else if (Array.isArray(value)) {
-				return `[ ${value.map((v) => format(v)).join(', ')} ]`;
+				return `[ ${value.map((v) => format(v)).join(", ")} ]`;
 			} else {
 				return `{ ${Object.entries(value)
 					.map(([key, val]) => `${key}: ${format(val)}`)
-					.join(', ')} }`;
+					.join(", ")} }`;
 			}
-		case 'string':
+		case "string":
 			return `"${value}"`;
-		case 'symbol':
+		case "symbol":
 			return `Symbol(${value.toString()})`;
-		case 'undefined':
-			return 'undefined';
+		case "undefined":
+			return "undefined";
 		default:
-			return '?';
+			return "?";
 	}
 };
 
@@ -39,21 +39,21 @@ export const assertEqual = <T>(actual: T, expected: T, message?: string) => {
 	const lhs = format(actual);
 	const rhs = format(expected);
 	if (lhs !== rhs) {
-		const explanation = message ?? 'Expected values to be equal:';
+		const explanation = message ?? "Expected values to be equal:";
 		const output = [
-			'',
-			'',
+			"",
+			"",
 			`  ${explanation}`,
 			`    actual:   ${lhs}`,
 			`    expected: ${rhs}`,
-			'',
-		].join('\n');
+			"",
+		].join("\n");
 
 		throw new Error(output);
 	}
 };
 
-export const assertThrows = (f: () => any, message: string) => {
+export const assertThrows = (f: () => void, message: string) => {
 	try {
 		f();
 	} catch (error) {
@@ -62,19 +62,18 @@ export const assertThrows = (f: () => any, message: string) => {
 	throw new Error(message);
 };
 
-export const assertDoesNotThrow = (f: () => any, message: string) => {
+export const assertDoesNotThrow = (f: () => void, message: string) => {
 	try {
 		f();
 	} catch (error) {
-		const output = [
-			'Expected function not to throw:',
-			message,
-			error,
-		].join('\n');
+		const output = ["Expected function not to throw:", message, error].join(
+			"\n"
+		);
 		throw new Error(output);
 	}
 };
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Call {
 	input: any[];
 	output: any[];
@@ -96,3 +95,5 @@ export const createSpy = (fn: (...args: any[]) => any) => {
 		},
 	});
 };
+
+/* eslint-enable @typescript-eslint/no-explicit-any */

@@ -1,7 +1,7 @@
-import { resolve } from 'path';
-import { pathToFileURL } from 'url';
-import { testModule, TestModule, TestResult, Mode } from '@windtunnel/core';
-import { format, ForegroundColors, Attributes } from '@windtunnel/colors';
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { testModule, TestModule, TestResult, Mode } from "@windtunnel/core";
+import { format, ForegroundColors, Attributes } from "@windtunnel/colors";
 
 interface TestReport {
 	passed: TestResult[];
@@ -15,12 +15,14 @@ const importModule = async (path: string): Promise<TestModule> => {
 	return mod;
 };
 
-const reportResults = async (results: AsyncIterable<TestResult>): Promise<TestReport> => {
+const reportResults = async (
+	results: AsyncIterable<TestResult>
+): Promise<TestReport> => {
 	const report: TestReport = {
 		passed: [],
 		failed: [],
 	};
-	console.log('');
+	console.log("");
 	for await (const result of results) {
 		const status = formatStatus(result);
 		const message = `${status} ${result.name}`;
@@ -29,19 +31,19 @@ const reportResults = async (results: AsyncIterable<TestResult>): Promise<TestRe
 			report.passed.push(result);
 		} else {
 			report.failed.push(result);
-		};
+		}
 	}
 	return report;
 };
 
 const formatStatus = (result: TestResult): string => {
 	if (result.passed) {
-		return format(' PASSED ', {
+		return format(" PASSED ", {
 			foreground: ForegroundColors.Green,
 			attributes: new Set([Attributes.Invert]),
 		});
 	} else {
-		return format(' FAILED ', {
+		return format(" FAILED ", {
 			foreground: ForegroundColors.Red,
 			attributes: new Set([Attributes.Invert]),
 		});
@@ -53,13 +55,13 @@ const reportFailed = (report: TestReport) => {
 		const failures = report.failed.map((result) => {
 			return `${result.name}: ${result.message}`;
 		});
-		console.log('');
-		console.log(failures.join('\n\n'));
+		console.log("");
+		console.log(failures.join("\n\n"));
 	}
 };
 
 const reportSummary = (report: TestReport) => {
-	console.log('');
+	console.log("");
 	console.log(`${report.passed.length} passed.`);
 	if (report.failed.length > 0) {
 		console.log(`${report.failed.length} failed.`);
@@ -72,8 +74,8 @@ const exitProcess = (report: TestReport) => {
 };
 
 interface Args {
-	path: string,
-	mode: Mode,
+	path: string;
+	mode: Mode;
 }
 
 const parseArgs = (args: string[]): Args => {
@@ -81,33 +83,35 @@ const parseArgs = (args: string[]): Args => {
 	let path: string | undefined;
 	for (const arg of args) {
 		switch (arg) {
-			case '--mode':
+			case "--mode": {
 				const value = args.shift();
 				switch (value) {
-					case 'concurrent':
+					case "concurrent":
 						mode = Mode.Concurrent;
 						break;
-					case 'serial':
+					case "serial":
 						mode = Mode.Serial;
 						break;
 					default:
-						console.error('Unknown value for option --mode:');
+						console.error("Unknown value for option --mode:");
 						console.error(value);
 				}
 				break;
-			default:
-				if (arg.startsWith('--')) {
-					console.error('Unexpected option:');
+			}
+			default: {
+				if (arg.startsWith("--")) {
+					console.error("Unexpected option:");
 					console.error(arg);
-					console.error('help: invoke with --help to see options');
+					console.error("help: invoke with --help to see options");
 				} else if (path !== undefined) {
-					console.error('Unexpected argument:');
+					console.error("Unexpected argument:");
 					console.error(arg);
-					console.error('help: invoke with --help to see options');
+					console.error("help: invoke with --help to see options");
 				} else {
 					path = arg;
 				}
 				break;
+			}
 		}
 	}
 
@@ -115,10 +119,10 @@ const parseArgs = (args: string[]): Args => {
 		return {
 			path,
 			mode: mode ?? Mode.Concurrent,
-		}
+		};
 	} else {
-		console.error('Missing required argument `path`');
-		console.error('help: invoke with --help to see options');
+		console.error("Missing required argument `path`");
+		console.error("help: invoke with --help to see options");
 		process.exit(1);
 	}
 };

@@ -1,5 +1,5 @@
-import { createRaceIterable } from 'nurburgring';
-import { Module, Entry, Fn, getEntries } from './module';
+import { createRaceIterable } from "nurburgring";
+import { Module, Entry, Fn, getEntries } from "./module";
 
 export type TestModule = Module<Fn>;
 
@@ -9,22 +9,28 @@ export interface TestResult {
 	message: string;
 }
 
-const Serial = 'Serial';
-const Concurrent = 'Concurrent';
+const Serial = "Serial";
+const Concurrent = "Concurrent";
 
 export type Mode = typeof Serial | typeof Concurrent;
 export const Mode = { Serial, Concurrent } as const;
 
 export interface TestOptions {
-	mode: Mode,
+	mode: Mode;
 }
 
-export const testModule = (mod: TestModule, options: TestOptions): AsyncIterable<TestResult> => {
+export const testModule = (
+	mod: TestModule,
+	options: TestOptions
+): AsyncIterable<TestResult> => {
 	const tests = getEntries(mod);
 	return runTests(tests, options);
 };
 
-const runTests = (items: Entry<Fn>[], options: TestOptions): AsyncIterable<TestResult> => {
+const runTests = (
+	items: Entry<Fn>[],
+	options: TestOptions
+): AsyncIterable<TestResult> => {
 	switch (options.mode) {
 		case Mode.Serial:
 			return runTestsSerially(items);
@@ -35,18 +41,22 @@ const runTests = (items: Entry<Fn>[], options: TestOptions): AsyncIterable<TestR
 	}
 };
 
-const runTestsConcurrently = (items: Entry<Fn>[]): AsyncIterable<TestResult> => {
+const runTestsConcurrently = (
+	items: Entry<Fn>[]
+): AsyncIterable<TestResult> => {
 	return createRaceIterable(items.map(runTest));
 };
 
-async function* runTestsSerially(items: Entry<Fn>[]): AsyncIterable<TestResult> {
+async function* runTestsSerially(
+	items: Entry<Fn>[]
+): AsyncIterable<TestResult> {
 	for (const item of items) {
-		yield (await runTest(item));
+		yield await runTest(item);
 	}
 }
 
 const assertUnreachable = (_: never): never => {
-	throw new Error('should be unreachable');
+	throw new Error("should be unreachable");
 };
 
 const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
@@ -56,7 +66,7 @@ const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
 		return {
 			name: name,
 			passed: true,
-			message: 'Passed.',
+			message: "Passed.",
 		};
 	} catch (error) {
 		if (error instanceof Error) {
@@ -65,13 +75,13 @@ const runTest = async (item: Entry<Fn>): Promise<TestResult> => {
 					name,
 					passed: false,
 					message: error.stack,
-				}
+				};
 			} else {
 				return {
 					name,
 					passed: false,
 					message: error.message,
-				}
+				};
 			}
 		} else {
 			return {

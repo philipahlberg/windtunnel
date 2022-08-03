@@ -1,6 +1,6 @@
-import { Attribute } from './attributes';
-import { BackgroundColor } from './background';
-import { ForegroundColor } from './foreground';
+import { Attribute } from "./attributes/index";
+import { BackgroundColor } from "./background/index";
+import { ForegroundColor } from "./foreground/index";
 
 export interface Options {
 	foreground?: ForegroundColor;
@@ -26,4 +26,4 @@ export const codes = (options: Options): EscapeCode[] => {
 	}
 
 	return codes.sort((a: EscapeCode, b: EscapeCode) => a - b);
-}
+};
