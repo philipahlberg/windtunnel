@@ -6,22 +6,5 @@
     "windtunnel-assert",
     "windtunnel-colors",
     "windtunnel-cli"
-  ],
-  "scripts": {
-    "uninstall": "node scripts/uninstall.mjs",
-    "build": "node scripts/build.mjs",
-    "test": "node scripts/test.mjs",
-    "version": "node scripts/version.mjs",
-    "publish": "node scripts/publish.mjs"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@rollup/plugin-typescript": "^8.2.1",
-    "@types/node": "^16.3.1",
-    "@windtunnel/cli": "0.6.2",
-    "rollup": "^2.53.1",
-    "tslib": "^2.3.0",
-    "typescript": "^4.3.5"
-  }
+  ]
 }

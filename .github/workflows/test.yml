@@ -14,7 +14,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 18
-    - run: npm install -g npm
+    - run: npm -v
     - run: npm install --workspaces
     - run: npm run build --workspaces
     - run: npm run test --workspaces
