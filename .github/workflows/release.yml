@@ -13,11 +13,11 @@ jobs:
         with:
           node-version: 18
       - run: node -v && npm -v
-      - run: npm ci --workspaces
+      - run: npm ci
       - run: npm run lint
       - run: npm run build --workspaces
       # Link built packages into node_modules
-      - run: npm ci --workspaces
+      - run: npm ci
       - run: npm run test --workspaces
       - run: npm publish --workspaces
         env:
